@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Mail\NotificacionSesion;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Mail;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use JWTAuth;
-
+use App\User;
 class LoginController extends Controller
 {
     use AuthenticatesUsers,ThrottlesLogins;
@@ -19,8 +19,8 @@ class LoginController extends Controller
     protected $decayMinutes=2;
 protected $lockoutTime=60;
     public function login(Request $request) {
-        $input = $request->only('email', 'password');
         
+        $input = $request->only('email', 'password');
         $jwt_token = null;
         if ($this->hasTooManyLoginAttempts($request)) {
             Log::alert('Se ha alcanzado el límite de intentos máximos que son: '.$this->maxAttempts.' por parte de: '.$request->email);
@@ -31,13 +31,7 @@ protected $lockoutTime=60;
                 'email' => $request->email
             ],429);
         }
-        
-       
-        
-        
         if (!$jwt_token = JWTAuth::attempt($input)) {
-        
-        
         $variable = $this->limiter()->hit($this->throttleKey($request)); 
         Log::alert('Intento de sesión número: '.$variable.' con el email '.$request->email);
         return response()->json([
@@ -49,11 +43,13 @@ protected $lockoutTime=60;
             $this->clearLoginAttempts($request);
             Log::info('Ha iniciado sesión con éxito '.$request->email);
             Mail::to($request->email)->send(new NotificacionSesion($_SERVER['REMOTE_ADDR']));
-            return response()->json([
-                'status' => 'ok',
+            $usuario = User::select('tipo_usuario')->where('email', $request->email)->first()->toArray(); 
+            $token =  [
                 'token' => $jwt_token,
+                'status' => 'ok',
                 'email' => $request->email
-                ]);
+            ];
+            return json_encode($usuario + $token);
         }
        
         }
