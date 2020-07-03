@@ -18,10 +18,19 @@ Route::post('/registro-proveedor', 'ProveedorController@register');
 Route::post('/registro-gerente', 'GerenteController@register');
 
 
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 Route::group(['middleware' => 'auth.jwt'], function () {
     Route::post('/logout', 'AuthController@logout');
 });
 
+
+// CRUD de negocios
+Route::post('/registro-negocio', 'NegociosController@register');
+Route::middleware('auth:api')->put('/actualizar-negocio/{id}','NegociosController@update', function (Request $request) {
+    return $request->negocios();
+});
+Route::middleware('auth:api')->delete('delete-negocio/{id}','NegociosController@delete');
