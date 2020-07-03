@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::post('/login', 'LoginController@login');
 Route::post('/registro-proveedor', 'ProveedorController@register');
-Route::post('/registro-distribuidora', 'TienditaController@register');
+Route::post('/registro-gerente', 'GerenteController@register');
 
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

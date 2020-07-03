@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use App\Proveedor;
+use App\Gerente;
 use App\User;
 
-class ProveedorController extends Controller
+class GerenteController extends Controller
 {
     public function register(Request $request) {
         $usuario = new User();
@@ -15,19 +14,15 @@ class ProveedorController extends Controller
         $usuario->email = $request->email;
         $usuario->password = bcrypt($request->password);
         $usuario->tipo_usuario = $request->tipo_usuario;
-       
         $usuario->save();
         $id = $usuario->id;
         printf($id);
-        $proveedor = new Proveedor();
+        $proveedor = new Gerente();
         $proveedor->nombre = $request->nombre;
         $proveedor->apellido_paterno = $request->apellido_paterno;
         $proveedor->apellido_materno = $request->apellido_materno;
-        $proveedor->telefono = $request->telefono;
-        $proveedor->direccion = $request->direccion;
         $proveedor->user_id = $id;
         $proveedor->save();
         
     }
-       
 }

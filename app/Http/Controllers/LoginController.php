@@ -20,7 +20,7 @@ class LoginController extends Controller
 protected $lockoutTime=60;
     public function login(Request $request) {
         $input = $request->only('email', 'password');
-        AuthenticatesUsers:
+        
         $jwt_token = null;
         if ($this->hasTooManyLoginAttempts($request)) {
             Log::alert('Se ha alcanzado el límite de intentos máximos que son: '.$this->maxAttempts.' por parte de: '.$request->email);

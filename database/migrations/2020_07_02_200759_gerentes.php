@@ -4,27 +4,24 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Distribuidoras extends Migration
+class Gerentes extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
+    protected $table = "gerentes";
     public function up()
     {
-        Schema::create('distribuidoras', function (Blueprint $table) {
+        Schema::create('gerentes', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
             $table->string('apellido_paterno');
             $table->string('apellido_materno');
-            $table->string('nombre_tienda');
-            $table->string('telefono');
-            $table->string('direccion');
-            $table->string('correo')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+           
+            $table->integer('user_id')->unsigned();            
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
@@ -36,6 +33,6 @@ class Distribuidoras extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('distribuidoras');
+        Schema::dropIfExists('gerentes');
     }
 }

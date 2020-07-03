@@ -19,7 +19,7 @@ class Distribuidora extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'nombre','apellido_paterno','apellido_materno','nombre_tienda','telefono','direccion', 'correo', 'password',
+        'nombre','direccion','telefono', 'rfc', 'gerente_id'
     ];
 
     /**
@@ -27,18 +27,7 @@ class Distribuidora extends Authenticatable implements JWTSubject
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    
     public function getJWTIdentifier() {
         return $this->getKey();
         }
