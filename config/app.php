@@ -162,6 +162,8 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        //Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class, // Lo agregué al final
 
         /*
          * Package Service Providers...

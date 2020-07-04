@@ -7,13 +7,13 @@ use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Spatie\Permission\Traits\HasRoles;
 
-class Negocios extends Model
+class Marca extends Model
 {
     use Notifiable;
     use HasRoles;
 
     protected $fillable = [
-        'nombre', 'direccion', 'telefono', 'rfc', 'gerente_id'
+        'nombre', 'logo'
     ];
 
     public function getJWTIdentifier()
