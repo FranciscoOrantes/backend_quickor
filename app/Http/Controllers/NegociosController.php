@@ -46,4 +46,8 @@ class NegociosController extends Controller
         $negocios = Negocios::find($id);
         $negocios->delete();
     }
+
+    public function listaNegocios(){
+        
+    }
 }

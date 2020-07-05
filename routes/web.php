@@ -17,6 +17,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/hol', function () {
+    return view('TestCarga.canciones');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// Sólo es para la prueba de la carga del logo
+Route::post('registro-marca', 'MarcaController@register'); 
+Route::get('crear-marca','MarcaController@formCrear');
