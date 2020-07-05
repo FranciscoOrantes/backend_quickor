@@ -25,7 +25,7 @@ class Productos extends Migration
             $table->integer('marca_id')->unsigned();            
             $table->foreign('marca_id')->references('id')->on('marcas');
             $table->integer('proveedor_id')->unsigned();            
-            $table->foreign('proveedor_id')->references('id')->on('proveedores');
+            $table->foreign('proveedor_id')->references('id')->on('proveedors');
             $table->timestamps();
             
         });
