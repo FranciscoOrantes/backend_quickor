@@ -16,8 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', 'LoginController@login');
 Route::post('/registro-proveedor', 'ProveedorController@register');
 Route::post('/registro-gerente', 'GerenteController@register');
-
-
+Route::middleware('jwt.auth:api')->put('/actualizar-proveedor/{id}', 'ProveedorController@update', function (Request $request) {
+    return $request->proveedores();
+});
+Route::middleware('jwt.auth:api')->get('/datos-proveedor/{id}', 'ProveedorController@show', function (Request $request) {
+    return $request->proveedores();
+});
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

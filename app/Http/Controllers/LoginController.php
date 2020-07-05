@@ -43,16 +43,12 @@ protected $lockoutTime=60;
             $this->clearLoginAttempts($request);
             Log::info('Ha iniciado sesión con éxito '.$request->email);
             Mail::to($request->email)->send(new NotificacionSesion($_SERVER['REMOTE_ADDR']));
-            $usuario = User::select('tipo_usuario','id')->where('email', $request->email)->get(); 
-           
+            $usuario = User::select('tipo_usuario','id')->where('email', $request->email)->get();    
             if($usuario[0]->tipo_usuario=='gerente'){
                 $usuario = User::select('users.tipo_usuario','gerentes.id')
                 ->join('gerentes','users.id','=','gerentes.user_id')
                 ->where('email', $request->email)->first()->toArray();
             }else{
-
-            
-            
                 $usuario = User::select('users.tipo_usuario','proveedors.id')
                 ->join('proveedors','users.id','=','proveedors.user_id')
                 ->where('email', $request->email)->first()->toArray();
