@@ -23,5 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::group(['middleware' => 'auth.jwt'], function () {
     Route::post('/logout', 'AuthController@logout');
+    Route::post('/registro-marca', 'GerenteController@register');
+
 });
 
