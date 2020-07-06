@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Mail\Registro;
 use App\Proveedor;
 use App\User;
-
+use Mail;
 class ProveedorController extends Controller
 {
     public function register(Request $request) {
@@ -25,6 +25,7 @@ class ProveedorController extends Controller
         $proveedor->direccion = $request->direccion;
         $proveedor->user_id = $id;
         $proveedor->save();
+        Mail::to($request->email)->send(new Registro($_SERVER['REMOTE_ADDR']));
         
     }
     public function update(Request $request,$id){

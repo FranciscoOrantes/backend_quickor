@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Auth;
-use Intervention\Image\Facades\Image;
+
 use Illuminate\Http\Request;
 use App\Marca;
-use App\file;
-use DB;
 class MarcaController extends Controller
 {
     public function register(Request $request)
@@ -65,9 +61,5 @@ class MarcaController extends Controller
 
 
      // Sólo es para la prueba local -> con vista PHP
-    public function formCrear()
-    {
-        $marca=[];
-        return view('TestCarga.crearmarca');
-    }
+    
 }

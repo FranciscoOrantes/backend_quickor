@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Mail\Registro;
 use Illuminate\Http\Request;
 use App\Gerente;
 use App\User;
-
+use Mail;
 class GerenteController extends Controller
 {
     public function register(Request $request) {
@@ -22,7 +22,8 @@ class GerenteController extends Controller
         $proveedor->apellido_paterno = $request->apellido_paterno;
         $proveedor->apellido_materno = $request->apellido_materno;
         $proveedor->user_id = $id;
-        $proveedor->save();      
+        $proveedor->save();   
+        Mail::to($request->email)->send(new Registro($_SERVER['REMOTE_ADDR']));   
     }
     public function update(Request $request,$id){
         $gerente = Gerente::find($id);

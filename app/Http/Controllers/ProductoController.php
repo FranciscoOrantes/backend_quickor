@@ -18,15 +18,15 @@ class ProductoController extends Controller
         $producto->presentacion = $request->presentacion;
         $producto->cantidad_presentacion = $request->cantidad_presentacion;
         $producto->tamano_producto = $request->tamano_producto;
-
+        $producto->logo = $request->logo;
         
-        if ($request->File('logo')) {
+       /* if ($request->File('logo')) {
             $file = $request->file('logo');
             $name = time().'.'.$file->getClientOriginalExtension();
             $destination = public_path('Logo_Producto/'); // Se encuentra en la carpeta -> public/Logo_Producto
             $file->move($destination, $name);
             $producto->logo = $name;
-        }
+        }*/
         
 
         //$producto->logo = $request->logo;
@@ -42,19 +42,18 @@ class ProductoController extends Controller
     public function update(Request $request, $id)
     {
         $producto = Producto::find($id);
-
         $producto->nombre = $request->nombre;
         $producto->presentacion = $request->presentacion;
         $producto->cantidad_presentacion = $request->cantidad_presentacion;
         $producto->tamano_producto = $request->tamano_producto;
-
-        if ($request->File('logo')) {
+        $producto->logo = $request->logo;
+        /*if ($request->File('logo')) {
             $file = $request->file('logo');
             $name = time().'.'.$file->getClientOriginalExtension();
             $destination = public_path('Logo_Producto/'); // Se encuentra en la carpeta -> public/Logo_Producto
             $file->move($destination, $name);
             $producto->logo = $name;
-        }
+        }*/
         //$producto->logo = $request->logo;
         $producto->precio = $request->precio;
         $producto->marca_id = $request->marca_id;
@@ -72,16 +71,12 @@ class ProductoController extends Controller
     }
 
 
-    public function listProducts()
+    public function listProducts($id)
     {
-        $id = Auth::id(); // Se obtienen el ID del usuario loggeado
-        $idProveedor = DB::table('proveedores')
-                 ->select('id')
-                 ->where('user_id', $id)
-                 ->first()
-                 ->id;
+         // Se obtienen el ID del usuario loggeado
+        
 
-        $producto = DB::table('productos')->where('proveedor_id','=',$idProveedor)->get();
+        $producto = Producto::select('productos.*')->where('proveedor_id','=',$id)->get();
 
         return $producto;
 
