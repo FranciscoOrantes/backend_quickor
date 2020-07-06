@@ -30,9 +30,33 @@ Route::middleware('jwt.auth:api')->get('/datos-gerente/{id}', 'ProveedorControll
 });
 Route::post('/registro-gerente', 'GerenteController@register');
 
+
+    // API negocios
+Route::middleware('jwt.auth:api')->post('/registro-negocio', 'NegociosController@register');
+Route::middleware('jwt.auth:api')->put('/actualizar-negocio/{id}', 'NegociosController@update', function (Request $request) {
+        return $request->negocios();
+});
+Route::middleware('jwt.auth:api')->delete('borrar-negocio/{id}', 'NegociosController@destroy');
+//Termina API Negocios
+
+//Api productos
+Route::middleware('jwt.auth:api')->post('/registro-producto', 'ProductoController@register');
+Route::middleware('jwt.auth:api')->put('/actualizar-producto/{id}', 'ProductoController@update', function (Request $request) {
+    return $request->producto();
+});
+Route::middleware('jwt.auth:api')->delete('borrar-producto/{id}', 'ProductoController@destroy');
+Route::middleware('jwt.auth:api')->get('lista-producto', 'ProductoController@listProducts');
+//Termina API productos
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+ //API marcas
+ Route::middleware('jwt.auth:api')->post('/registro-marca', 'MarcaController@register');
+ Route::middleware('jwt.auth:api')->put('/actualizar-marca/{id}', 'MarcaController@update', function (Request $request) {
+     return $request->marca();
+ });
+ Route::middleware('jwt.auth:api')->delete('borrar-marca/{id}', 'MarcaController@destroy');
 Route::group(['middleware' => 'auth.jwt'], function () {
     Route::post('/logout', 'AuthController@logout');
     Route::post('/registro-marca', 'GerenteController@register');
