@@ -8,6 +8,7 @@ use App\Producto;
 use App\Proveedor;
 use DB;
 use Proveedores;
+use App\Http\Controllers\Input;
 class ProductoController extends Controller
 {
     public function register(Request $request)
@@ -86,5 +87,10 @@ class ProductoController extends Controller
             select * from productos where proveedor_id = 
             (select id from proveedores where user_id = 3)
         */
+    }
+    public function buscarProductos(Request $request,$id){
+      
+        $producto = Producto::select('productos.*')->where('nombre','like','%'.$request->nombre,'%')->get();
+        return $producto;
     }
 }

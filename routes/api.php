@@ -54,6 +54,10 @@ Route::middleware('jwt.auth:api')->put('/actualizar-producto/{id}', 'ProductoCon
 });
 Route::middleware('jwt.auth:api')->delete('borrar-producto/{id}', 'ProductoController@destroy');
 Route::middleware('jwt.auth:api')->get('lista-producto/{id}', 'ProductoController@listProducts');
+
+Route::middleware('jwt.auth:api')->put('/buscar-productos/{id}', 'ProductoController@buscarProductos', function (Request $request) {
+    return $request->producto();
+});
 //Termina API productos
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
