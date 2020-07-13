@@ -10,10 +10,11 @@ class GerenteController extends Controller
 {
     public function register(Request $request) {
         $usuario = new User();
-        
+        #0 ES ACTIVO, 1 ES INACTIVO
         $usuario->email = $request->email;
         $usuario->password = bcrypt($request->password);
         $usuario->tipo_usuario = $request->tipo_usuario;
+        $usuario->status = 0;
         $usuario->save();
         $id = $usuario->id;
         printf($id);

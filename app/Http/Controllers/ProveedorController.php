@@ -14,6 +14,7 @@ class ProveedorController extends Controller
         $usuario->email = $request->email;
         $usuario->password = bcrypt($request->password);
         $usuario->tipo_usuario = $request->tipo_usuario;
+        $usuario->status = 0;
         $usuario->save();
         $id = $usuario->id;
         printf($id);
