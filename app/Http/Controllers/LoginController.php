@@ -45,11 +45,11 @@ protected $lockoutTime=60;
             Mail::to($request->email)->send(new NotificacionSesion($_SERVER['REMOTE_ADDR']));
             $usuario = User::select('tipo_usuario','id')->where('email', $request->email)->get();    
             if($usuario[0]->tipo_usuario=='gerente'){
-                $usuario = User::select('users.tipo_usuario','gerentes.id')
+                $usuario = User::select('users.tipo_usuario','gerentes.id','users.status')
                 ->join('gerentes','users.id','=','gerentes.user_id')
                 ->where('email', $request->email)->first()->toArray();
             }else{
-                $usuario = User::select('users.tipo_usuario','proveedors.id')
+                $usuario = User::select('users.tipo_usuario','proveedors.id','users.status')
                 ->join('proveedors','users.id','=','proveedors.user_id')
                 ->where('email', $request->email)->first()->toArray();
             }
