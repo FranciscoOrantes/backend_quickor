@@ -50,6 +50,6 @@ class GerenteController extends Controller
         $usuario->status = 1;
         $usuario->update();
         Mail::to($email)->send(new DesactivarCuenta($_SERVER['REMOTE_ADDR']));
-        return $usuario;  
+        
     }
 }
