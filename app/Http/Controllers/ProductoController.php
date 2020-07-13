@@ -18,6 +18,7 @@ class ProductoController extends Controller
         $producto->presentacion = $request->presentacion;
         $producto->cantidad_presentacion = $request->cantidad_presentacion;
         $producto->tamano_producto = $request->tamano_producto;
+        $producto->categoria = $request->categoria;
         $producto->logo = $request->logo;
         
        /* if ($request->File('logo')) {
@@ -46,6 +47,7 @@ class ProductoController extends Controller
         $producto->presentacion = $request->presentacion;
         $producto->cantidad_presentacion = $request->cantidad_presentacion;
         $producto->tamano_producto = $request->tamano_producto;
+        $producto->categoria = $request->categoria;
         $producto->logo = $request->logo;
         /*if ($request->File('logo')) {
             $file = $request->file('logo');

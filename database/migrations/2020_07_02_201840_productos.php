@@ -19,7 +19,8 @@ class Productos extends Migration
             $table->string('nombre');
             $table->string('presentacion');
             $table->integer('cantidad_presentacion');
-            $table->integer('tamano_producto');          
+            $table->integer('tamano_producto');
+            $table->string('categoria');          
             $table->string('logo');
             $table->float('precio'); 
             $table->integer('marca_id')->unsigned();            
