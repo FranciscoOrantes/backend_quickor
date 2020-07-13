@@ -49,6 +49,8 @@ class ProveedorController extends Controller
                 ->join('proveedors','users.id','=','proveedors.user_id')
                 ->where('proveedors.user_id', $id)->first()->toArray();
                 return $idUsuario;
+
+        #priuenafsddf        
     }
        
 }
