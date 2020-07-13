@@ -90,7 +90,7 @@ class ProductoController extends Controller
     }
     public function buscarProductos(Request $request,$id){
       
-        $producto = Producto::select('productos.*')->where('nombre','like','%'.$request->nombre,'%')->get();
+        $producto = Producto::select('productos.*')->where('nombre','like',"%$request->nombre%")->get();
         return $producto;
     }
 }
