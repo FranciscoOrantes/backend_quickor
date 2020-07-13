@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\DesactivarCuenta;
 use Illuminate\Http\Request;
 use App\Mail\Registro;
 use App\Proveedor;
@@ -44,11 +45,18 @@ class ProveedorController extends Controller
         return $proveedor;
     }
     public function desactivarCuenta($id){
-        $proveedor = Proveedor::find($id);
-        $idUsuario = User::select('users.id','users.email')
+        
+        $idUsuario = User::select('users.id')
                 ->join('proveedors','users.id','=','proveedors.user_id')
                 ->where('proveedors.user_id', $id)->first()->toArray();
-                return $idUsuario;
+        $email = User::select('users.email')
+        ->join('proveedors','users.id','=','proveedors.user_id')
+        ->where('proveedors.user_id', $id)->first()->toArray();        
+        $usuario = User::find($idUsuario);
+        $usuario->status = 1;
+        $usuario->update();
+        Mail::to($email)->send(new DesactivarCuenta($_SERVER['REMOTE_ADDR']));
+        return $usuario;        
 
         #priuenafsddf        
     }

@@ -15,19 +15,23 @@ use Illuminate\Support\Facades\Route;
 */
 Route::post('/login', 'LoginController@login');
 Route::post('/registro-proveedor', 'ProveedorController@register');
-Route::middleware('jwt.auth:api')->get('/desactivar-cuenta/{id}', 'ProveedorController@desactivarCuenta', function (Request $request) {
+Route::middleware('jwt.auth:api')->get('/desactivar-cuenta-proveedor/{id}', 'ProveedorController@desactivarCuenta', function (Request $request) {
     return $request->proveedores();
+});
+
+Route::middleware('jwt.auth:api')->get('/desactivar-cuenta-gerente/{id}', 'GerenteController@desactivarCuenta', function (Request $request) {
+    return $request->gerente();
 });
 
 Route::middleware('jwt.auth:api')->put('/actualizar-proveedor/{id}', 'ProveedorController@update', function (Request $request) {
     return $request->proveedores();
 });
 Route::middleware('jwt.auth:api')->get('/datos-proveedor/{id}', 'GerenteController@show', function (Request $request) {
-    return $request->proveedores();
+    return $request->gerente();
 });
 
 Route::middleware('jwt.auth:api')->put('/actualizar-gerente/{id}', 'GerenteController@update', function (Request $request) {
-    return $request->proveedores();
+    return $request->gerente();
 });
 Route::middleware('jwt.auth:api')->get('/datos-gerente/{id}', 'ProveedorController@show', function (Request $request) {
     return $request->proveedores();
