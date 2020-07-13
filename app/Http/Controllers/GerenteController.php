@@ -40,13 +40,10 @@ class GerenteController extends Controller
         return $gerente;
     }
     public function desactivarCuenta($id){
-        $idUsuario = User::select('users.id')
-                ->join('gerentes','users.id','=','gerentes.user_id')
-                ->where('gerentes.user_id', $id)->first()->toArray();
         $email = User::select('users.email')
         ->join('gerentes','users.id','=','gerentes.user_id')
-        ->where('gerentes.user_id', $id)->first()->toArray();        
-        $usuario = User::find($idUsuario);
+        ->where('gerentes.user_id', $id)->get();        
+        $usuario = User::find($id);
         $usuario->status = 1;
         $usuario->update();
         Mail::to($email)->send(new DesactivarCuenta($_SERVER['REMOTE_ADDR']));

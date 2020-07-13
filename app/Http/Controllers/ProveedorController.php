@@ -45,14 +45,10 @@ class ProveedorController extends Controller
         return $proveedor;
     }
     public function desactivarCuenta($id){
-        
-        $idUsuario = User::select('users.id')
-                ->join('proveedors','users.id','=','proveedors.user_id')
-                ->where('proveedors.user_id', $id)->first()->toArray();
         $email = User::select('users.email')
         ->join('proveedors','users.id','=','proveedors.user_id')
         ->where('proveedors.user_id', $id)->first()->toArray();        
-        $usuario = User::find($idUsuario);
+        $usuario = User::find($id);
         $usuario->status = 1;
         $usuario->update();
         Mail::to($email)->send(new DesactivarCuenta($_SERVER['REMOTE_ADDR']));
