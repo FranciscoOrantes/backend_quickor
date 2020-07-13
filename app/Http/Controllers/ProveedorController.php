@@ -43,5 +43,11 @@ class ProveedorController extends Controller
         $proveedor = Proveedor::find($id);
         return $proveedor;
     }
+    public function desactivarCuenta($id){
+        $proveedor = Proveedor::find($id);
+        $idUsuario = User::select('users.id','users.email')
+                ->join('proveedors','users.id','=',$proveedor->id);
+        return $idUsuario;
+    }
        
 }

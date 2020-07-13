@@ -38,4 +38,7 @@ class GerenteController extends Controller
         $gerente = Gerente::find($id);
         return $gerente;
     }
+    public function desactivarCuenta($id){
+        
+    }
 }

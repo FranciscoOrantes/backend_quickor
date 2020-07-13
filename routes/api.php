@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 Route::post('/login', 'LoginController@login');
 Route::post('/registro-proveedor', 'ProveedorController@register');
+Route::middleware('jwt.auth:api')->get('/desactivar-cuenta/{id}', 'ProveedorController@desactivarCuenta', function (Request $request) {
+    return $request->proveedores();
+});
+
 Route::middleware('jwt.auth:api')->put('/actualizar-proveedor/{id}', 'ProveedorController@update', function (Request $request) {
     return $request->proveedores();
 });
