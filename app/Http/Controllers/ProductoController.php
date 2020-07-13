@@ -90,7 +90,12 @@ class ProductoController extends Controller
     }
     public function buscarProductos(Request $request,$id){
       
+        $producto = Producto::select('productos.*')->where('nombre','like',"%$request->nombre%")->where('productos.proveedor_id','=',$id)->get();
+        return $producto;
+    }
+    public function buscarProductosGeneral(Request $request){
         $producto = Producto::select('productos.*')->where('nombre','like',"%$request->nombre%")->get();
         return $producto;
+
     }
 }

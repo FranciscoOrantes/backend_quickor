@@ -58,6 +58,9 @@ Route::middleware('jwt.auth:api')->get('lista-producto/{id}', 'ProductoControlle
 Route::middleware('jwt.auth:api')->get('/buscar-productos/{id}', 'ProductoController@buscarProductos', function (Request $request) {
     return $request->producto();
 });
+Route::middleware('jwt.auth:api')->get('/buscar-productos-general/{id}', 'ProductoController@buscarProductosGeneral', function (Request $request) {
+    return $request->producto();
+});
 //Termina API productos
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
