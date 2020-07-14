@@ -98,4 +98,8 @@ class ProductoController extends Controller
         return $producto;
 
     }
+    public function filtrarPorCategoria(Request $request){
+        $producto = Producto::select('productos.*')->where('categoria','=',$request->categoria)->get();
+        return $producto;
+    }
 }
