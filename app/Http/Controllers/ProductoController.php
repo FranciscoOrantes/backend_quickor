@@ -87,9 +87,49 @@ class ProductoController extends Controller
         return $producto;
 
         /*  Así se vería en la sentencia sql
-
             select * from productos where proveedor_id = 
             (select id from proveedores where user_id = 3)
         */
     }
+
+
+    // Buscar productos por nombre para el cliente
+    public function BuscarProductos(Request $request)
+    {
+        $nombre = $request->nombre;
+        $query = DB::table('productos')
+        ->where('nombre','LIKE','%'.$nombre.'%')
+        ->get();
+        
+        return $query;
+    }
+
+    // Buscador de productos para el Proveedor
+    public function BuscarProductosProveedor(Request $request)
+    {
+        $id = 1; // el $id Va a ser del proveedor
+        $nombre = $request->nombre;
+
+        $query = DB::table('productos')
+        ->where('proveedor_id','=',$id)
+        ->where('nombre','LIKE','%'.$nombre.'%')
+        ->get();
+        
+        return $query;
+    }
+
+    // Filtrar productos por categoria
+
+    // Buscador de proveedores por producto
+    public function BuscarProveedores(Request $request)
+    {
+        $nombre = $request->nombre;
+        $query = DB::table('proveedores')
+        ->where('nombre','LIKE','%'.$nombre.'%')
+        ->get();
+        
+        return $query;
+    }
+
+
 }

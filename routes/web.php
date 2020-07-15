@@ -25,6 +25,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+
 // Sólo es para la prueba de la carga del logo
-Route::post('registro-marca', 'MarcaController@register'); 
-Route::get('crear-marca','MarcaController@formCrear');
+//Route::post('registro-marca', 'MarcaController@register'); 
+//Route::get('crear-marca','MarcaController@formCrear');
