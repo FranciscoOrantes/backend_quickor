@@ -63,7 +63,7 @@ class ProveedorController extends Controller
         printf($codigo);
         $correo = $request->correo;
         printf($correo);
-        #Mail::to($email)->send(new CambiarPassword($codigo));
+        Mail::to($correo)->send(new CambiarPassword($codigo));
         return $codigo;
     }
 
