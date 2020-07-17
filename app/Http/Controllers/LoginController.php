@@ -109,7 +109,7 @@ protected $lockoutTime=60;
         
                public function actualizarPassword(Request $request,$id){
                 $usuario = User::find($id);
-                $usuario->password = $request->password;
+                $usuario->password = bcrypt($request->password);
                 $usuario->update();
                 return $usuario;
             }
