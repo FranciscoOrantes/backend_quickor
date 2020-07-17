@@ -19,10 +19,10 @@ Route::middleware('jwt.auth:api')->put('/desactivar-cuenta-proveedor/{id}', 'Pro
     return $request->proveedores();
 });
 Route::middleware('jwt.auth:api')->get('/cambiar-password', 'LoginController@cambiarPassword', function (Request $request) {
-    return $request->proveedores();
+    return $request->login();
 });
 Route::middleware('jwt.auth:api')->put('/actualizar-password/{id}', 'LoginController@actualizarPassword', function (Request $request) {
-    return $request->proveedores();
+    return $request->login();
 });
 
 Route::middleware('jwt.auth:api')->put('/desactivar-cuenta-gerente/{id}', 'GerenteController@desactivarCuenta', function (Request $request) {
