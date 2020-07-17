@@ -127,4 +127,19 @@ class ProductoController extends Controller
             
         return $query;
     }
+
+    # Api de buscar productos por proveedor
+    public function BuscarProductoPorProveedor(Request $request)
+    {
+        $nombre = $request->nombre;
+        $query = DB::table('productos')
+        ->join('proveedores','proveedores.id','productos.proveedor_id')
+        ->select('productos.id','productos.nombre', 'productos.presentacion','productos.cantidad_presentacion',
+        'productos.tamano_producto','productos.logo','productos.precio', 'productos.marca_id','productos.proveedor_id')
+        ->where('proveedores.nombre','LIKE','%'.$nombre.'%')
+        ->get();
+            
+        return $query;
+        
+    }
 }

@@ -50,6 +50,8 @@ Route::group(['middleware' => 'jwt.auth'], function () { // Antes era:  auth.jwt
     Route::middleware('jwt.auth:api')->post('buscar-producto-proveedor', 'ProductoController@BuscarProductosProveedor');
     // - - -  Lo acabo de agregar - - -
     Route::middleware('jwt.auth:api')->post('/buscar-proveedor-producto', 'ProductoController@BuscarProveedorProducto');
+    Route::middleware('jwt.auth:api')->post('/buscar-producto-por-proveedor', 'ProductoController@BuscarProductoPorProveedor');
+    
     
     //API marcas
     Route::middleware('jwt.auth:api')->post('/registro-marca', 'MarcaController@register');
