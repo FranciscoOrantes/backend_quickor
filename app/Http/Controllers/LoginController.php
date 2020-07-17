@@ -113,12 +113,5 @@ protected $lockoutTime=60;
                 $usuario->update();
                 return $usuario;
             }
-            public function cambiarPassword(Request $request){
-                $codigo = uniqid();
-                printf($codigo);
-                $correo = $request->correo;
-                printf($correo);
-                #Mail::to($email)->send(new CambiarPassword($codigo));
-                return $codigo;
-            }
+            
 }
