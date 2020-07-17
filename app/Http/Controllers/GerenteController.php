@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Mail\Registro;
 use App\Mail\DesactivarCuenta;
+use App\Mail\CambiarPassword;
 use Illuminate\Http\Request;
 use App\Gerente;
 use App\User;
@@ -50,9 +51,5 @@ class GerenteController extends Controller
         return $usuario;  
     }
 
-    public function cambiarPassword(Request $request){
-        $codigo = uniqid();
-        printf($codigo);
-        Mail::to($request->email)->send(new DesactivarCuenta($_SERVER['REMOTE_ADDR']));
-    }
+   
 }

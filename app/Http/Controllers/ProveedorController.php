@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\DesactivarCuenta;
+
 use Illuminate\Http\Request;
 use App\Mail\Registro;
 use App\Proveedor;
@@ -56,5 +57,9 @@ class ProveedorController extends Controller
 
         #priuenafsddf        
     }
+
+    
+
+   
        
 }
