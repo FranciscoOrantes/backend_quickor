@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Negocios;
+use DB;
 
 
 class NegociosController extends Controller
@@ -50,4 +51,17 @@ class NegociosController extends Controller
     public function listaNegocios(){
         
     }
+
+    
+    # Yo como proveedores quiero tener un buscador de clientes/negocio
+    public function BuscarProveedorNegocio(Request $request)
+    {
+        $nombre = $request->nombre;
+        $query = DB::table('negocios')
+        ->where('nombre','LIKE','%'.$nombre.'%')
+        ->get();
+        
+        return $query;
+    }
+
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Proveedor;
 use App\User;
+use DB;
 
 class ProveedorController extends Controller
 {
@@ -28,6 +29,5 @@ class ProveedorController extends Controller
         $proveedor->user_id = $id;
         $proveedor->save();
         
-    }
-       
+    }       
 }

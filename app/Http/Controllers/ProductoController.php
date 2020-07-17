@@ -85,11 +85,6 @@ class ProductoController extends Controller
         $producto = DB::table('productos')->where('proveedor_id','=',$idProveedor)->get();
 
         return $producto;
-
-        /*  Así se vería en la sentencia sql
-            select * from productos where proveedor_id = 
-            (select id from proveedores where user_id = 3)
-        */
     }
 
 
@@ -118,18 +113,18 @@ class ProductoController extends Controller
         return $query;
     }
 
-    // Filtrar productos por categoria
+    
+    # yo como cliente quiero un buscador de proveedores por producto
+    public function BuscarProveedorProducto(Request $request){
 
-    // Buscador de proveedores por producto
-    public function BuscarProveedores(Request $request)
-    {
         $nombre = $request->nombre;
         $query = DB::table('proveedores')
-        ->where('nombre','LIKE','%'.$nombre.'%')
+        ->join('productos','productos.proveedor_id','proveedores.id')
+        ->select('proveedores.id','proveedores.nombre', 'proveedores.apellido_paterno',
+        'proveedores.apellido_materno','proveedores.telefono','proveedores.direccion', 'proveedores.user_id')
+        ->where('productos.nombre','LIKE','%'.$nombre.'%')
         ->get();
-        
+            
         return $query;
     }
-
-
 }

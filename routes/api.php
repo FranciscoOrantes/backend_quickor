@@ -34,6 +34,8 @@ Route::group(['middleware' => 'jwt.auth'], function () { // Antes era:  auth.jwt
         return $request->negocios();
     });
     Route::middleware('jwt.auth:api')->delete('borrar-negocio/{id}', 'NegociosController@destroy');
+    // --- Lo acabo de agregar ---
+    Route::middleware('jwt.auth:api')->post('/buscar-negocios', 'NegociosController@BuscarProveedorNegocio');
 
 
     // API de productos
@@ -46,6 +48,8 @@ Route::group(['middleware' => 'jwt.auth'], function () { // Antes era:  auth.jwt
     Route::middleware('jwt.auth:api')->get('lista-producto', 'ProductoController@listProducts');
     Route::middleware('jwt.auth:api')->post('buscar-producto', 'ProductoController@BuscarProductos');
     Route::middleware('jwt.auth:api')->post('buscar-producto-proveedor', 'ProductoController@BuscarProductosProveedor');
+    // - - -  Lo acabo de agregar - - -
+    Route::middleware('jwt.auth:api')->post('/buscar-proveedor-producto', 'ProductoController@BuscarProveedorProducto');
     
     //API marcas
     Route::middleware('jwt.auth:api')->post('/registro-marca', 'MarcaController@register');
