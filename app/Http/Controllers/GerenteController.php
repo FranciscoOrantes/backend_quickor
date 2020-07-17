@@ -49,4 +49,10 @@ class GerenteController extends Controller
         Mail::to($email)->send(new DesactivarCuenta($_SERVER['REMOTE_ADDR']));
         return $usuario;  
     }
+
+    public function cambiarPassword(Request $request){
+        $codigo = uniqid();
+        printf($codigo);
+        Mail::to($request->email)->send(new DesactivarCuenta($_SERVER['REMOTE_ADDR']));
+    }
 }

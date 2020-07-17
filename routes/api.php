@@ -18,6 +18,9 @@ Route::post('/registro-proveedor', 'ProveedorController@register');
 Route::middleware('jwt.auth:api')->put('/desactivar-cuenta-proveedor/{id}', 'ProveedorController@desactivarCuenta', function (Request $request) {
     return $request->proveedores();
 });
+Route::middleware('jwt.auth:api')->put('/cambiar-password-proveedor', 'ProveedorController@desactivarCuenta', function (Request $request) {
+    return $request->proveedores();
+});
 
 Route::middleware('jwt.auth:api')->put('/desactivar-cuenta-gerente/{id}', 'GerenteController@desactivarCuenta', function (Request $request) {
     return $request->gerente();
