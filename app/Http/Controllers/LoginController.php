@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\NotificacionSesion;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\DB;
-use App\Mail\CambiarPassword;
+
 use Illuminate\Http\Request;
 use Mail;
 use Tymon\JWTAuth\Exceptions\JWTException;
