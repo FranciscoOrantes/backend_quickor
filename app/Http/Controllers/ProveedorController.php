@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\DesactivarCuenta;
-use App\Mail\CambiarPassword;
+
 use Illuminate\Http\Request;
 use App\Mail\Registro;
 use App\Proveedor;

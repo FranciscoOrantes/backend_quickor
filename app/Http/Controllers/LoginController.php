@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\NotificacionSesion;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\DB;
-
+use App\Mail\CambiarPassword;
 use Illuminate\Http\Request;
 use Mail;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -119,6 +119,10 @@ protected $lockoutTime=60;
                 $correo = $request->correo;
                 printf($correo);
                 Mail::to($correo)->send(new CambiarPassword($codigo));
-                return $codigo;
+                
+                return response()->json([
+                    'codigo' => $codigo,
+                    
+                    ], 200);
             }
 }
