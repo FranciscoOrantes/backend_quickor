@@ -102,4 +102,33 @@ class ProductoController extends Controller
         $producto = Producto::select('productos.*')->where('categoria','=',$request->categoria)->get();
         return $producto;
     }
+    
+     # yo como cliente quiero un buscador de proveedores por producto
+     public function BuscarProveedorProducto(Request $request){
+
+        $nombre = $request->nombre;
+        $query = Proveedor::select('proveedores.id','proveedores.nombre', 'proveedores.apellido_paterno',
+        'proveedores.apellido_materno','proveedores.telefono','proveedores.direccion', 'proveedores.user_id')
+        ->join('productos','productos.proveedor_id','proveedores.id')
+        ->where('productos.nombre','LIKE','%'.$nombre.'%')
+        ->get();
+            
+        return $query;
+    }
+
+    # Api de buscar productos por proveedor
+    public function BuscarProductoPorProveedor(Request $request)
+    {
+        $nombre = $request->nombre;
+        $query = Producto::select('productos.id','productos.nombre', 'productos.presentacion','productos.cantidad_presentacion',
+        'productos.tamano_producto','productos.logo','productos.precio', 'productos.marca_id','productos.proveedor_id')
+        ->join('proveedores','proveedores.id','productos.proveedor_id')
+        ->where('proveedores.nombre','LIKE','%'.$nombre.'%')
+        ->get();
+            
+        return $query;
+        
+    }
+
+    
 }

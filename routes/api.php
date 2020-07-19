@@ -51,6 +51,10 @@ Route::middleware('jwt.auth:api')->put('/actualizar-negocio/{id}', 'NegociosCont
         return $request->negocios();
 });
 Route::middleware('jwt.auth:api')->delete('borrar-negocio/{id}', 'NegociosController@destroy');
+
+// --- Lo acabo de agregar ---
+Route::middleware('jwt.auth:api')->post('/buscar-negocios', 'NegociosController@BuscarProveedorNegocio');
+
 //Termina API Negocios
 
 //Api productos
@@ -71,6 +75,9 @@ Route::middleware('jwt.auth:api')->get('/buscar-productos-general', 'ProductoCon
 Route::middleware('jwt.auth:api')->get('/buscar-productos-categoria', 'ProductoController@filtrarPorCategoria', function (Request $request) {
     return $request->producto();
 });
+
+Route::middleware('jwt.auth:api')->post('/buscar-proveedor-producto', 'ProductoController@BuscarProveedorProducto');
+    Route::middleware('jwt.auth:api')->post('/buscar-producto-por-proveedor', 'ProductoController@BuscarProductoPorProveedor');
 //Termina API productos
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
