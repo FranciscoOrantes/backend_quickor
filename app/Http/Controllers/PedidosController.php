@@ -33,6 +33,8 @@ class PedidosController extends Controller
             
             $pedido->save();
        }
+       $pedidos = Pedidos::all();
+       return $pedidos;
     
     }
 }
