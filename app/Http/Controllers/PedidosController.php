@@ -25,6 +25,8 @@ class PedidosController extends Controller
             $pedido->status_pago = $req['status_pago'];
             $pedido->fecha = $fechaActual;
             $pedido->num_pedido = $num_pedido_actual;
+            $pedido->cantidad = $req['cantidad'];
+            
             $pedido->save();
        }
     

@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notifiable;
 class Pedidos extends Model
 {
     protected $fillable = [
-        'producto_id', 'proveedor_id','gerente_id','status','status_pago','fecha','num_pedido'
+        'producto_id', 'proveedor_id','gerente_id','status','status_pago','fecha','num_pedido','cantidad'
     ];
 
     public function getJWTIdentifier()
