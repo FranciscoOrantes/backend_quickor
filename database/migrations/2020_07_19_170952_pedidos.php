@@ -37,6 +37,6 @@ class Pedidos extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('pedidos');
     }
 }
