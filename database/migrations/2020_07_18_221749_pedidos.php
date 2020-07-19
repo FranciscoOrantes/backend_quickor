@@ -25,6 +25,7 @@ class Pedidos extends Migration
             $table->string('status_pago');
             $table->string('fecha');
             $table->integer('num_pedido');
+            $table->integer('cantidad');
             $table->timestamps();
         });
     }
