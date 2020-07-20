@@ -47,11 +47,6 @@ class NegociosController extends Controller
         $negocios = Negocios::find($id);
         $negocios->delete();
     }
-
-    public function listaNegocios(){
-        
-    }
-
     
     # Yo como proveedores quiero tener un buscador de clientes/negocio
     public function BuscarProveedorNegocio(Request $request)

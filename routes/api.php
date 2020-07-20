@@ -59,4 +59,14 @@ Route::group(['middleware' => 'jwt.auth'], function () { // Antes era:  auth.jwt
         return $request->marca();
     });
     Route::middleware('jwt.auth:api')->delete('borrar-marca/{id}', 'MarcaController@destroy');
+
+
+    // API de Contactos
+    Route::middleware('jwt.auth:api')->post('/agregar-contacto', 'ContactosController@register');
+    Route::middleware('jwt.auth:api')->delete('borrar-contacto/{id}', 'ContactosController@destroy');
+    Route::middleware('jwt.auth:api')->post('/lista-contactos-gerente', 'ContactosController@ListaContactosGerente');
+    Route::middleware('jwt.auth:api')->get('/lista-contactos-proveedor', 'ContactosController@ListaContactosProveedores');
+       
+
+
 });
