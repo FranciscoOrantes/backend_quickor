@@ -34,9 +34,7 @@ Route::group(['middleware' => 'jwt.auth'], function () { // Antes era:  auth.jwt
         return $request->negocios();
     });
     Route::middleware('jwt.auth:api')->delete('borrar-negocio/{id}', 'NegociosController@destroy');
-    // --- Lo acabo de agregar ---
     Route::middleware('jwt.auth:api')->post('/buscar-negocios', 'NegociosController@BuscarProveedorNegocio');
-
 
     // API de productos
     Route::middleware('jwt.auth:api')->post('/registro-producto', 'ProductoController@register');
@@ -48,7 +46,6 @@ Route::group(['middleware' => 'jwt.auth'], function () { // Antes era:  auth.jwt
     Route::middleware('jwt.auth:api')->get('lista-producto', 'ProductoController@listProducts');
     Route::middleware('jwt.auth:api')->post('buscar-producto', 'ProductoController@BuscarProductos');
     Route::middleware('jwt.auth:api')->post('buscar-producto-proveedor', 'ProductoController@BuscarProductosProveedor');
-    // - - -  Lo acabo de agregar - - -
     Route::middleware('jwt.auth:api')->post('/buscar-proveedor-producto', 'ProductoController@BuscarProveedorProducto');
     Route::middleware('jwt.auth:api')->post('/buscar-producto-por-proveedor', 'ProductoController@BuscarProductoPorProveedor');
     
@@ -64,9 +61,9 @@ Route::group(['middleware' => 'jwt.auth'], function () { // Antes era:  auth.jwt
     // API de Contactos
     Route::middleware('jwt.auth:api')->post('/agregar-contacto', 'ContactosController@register');
     Route::middleware('jwt.auth:api')->delete('borrar-contacto/{id}', 'ContactosController@destroy');
-    Route::middleware('jwt.auth:api')->post('/lista-contactos-gerente', 'ContactosController@ListaContactosGerente');
+    Route::middleware('jwt.auth:api')->get('/lista-contactos-gerente', 'ContactosController@ListaContactosGerente');
     Route::middleware('jwt.auth:api')->get('/lista-contactos-proveedor', 'ContactosController@ListaContactosProveedores');
-       
-
+    Route::middleware('jwt.auth:api')->post('/buscar-contactos-gerente', 'ContactosController@BuscarContactoGerente');
+    Route::middleware('jwt.auth:api')->post('/buscar-contactos-proveedor', 'ContactosController@BuscarContactoProveedor');  
 
 });

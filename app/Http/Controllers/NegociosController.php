@@ -10,10 +10,8 @@ use DB;
 
 class NegociosController extends Controller
 {
-
     public function register(Request $request)
     {
-
         $negocios = new Negocios();
 
         $negocios->nombre = $request->nombre;
@@ -41,22 +39,21 @@ class NegociosController extends Controller
         return $negocios;
     }
 
-
     public function destroy($id)
     {
         $negocios = Negocios::find($id);
         $negocios->delete();
     }
     
-    # Yo como proveedores quiero tener un buscador de clientes/negocio
+    # Yo como proveedores quiero tener un buscador de negocio
     public function BuscarProveedorNegocio(Request $request)
     {
         $nombre = $request->nombre;
-        $query = DB::table('negocios')
+        $negocios = DB::table('negocios')
         ->where('nombre','LIKE','%'.$nombre.'%')
         ->get();
         
-        return $query;
+        return $negocios;
     }
 
 }

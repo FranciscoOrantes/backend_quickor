@@ -73,6 +73,7 @@ class ProductoController extends Controller
     }
 
 
+    # Lista de productos del proveedor X en específico
     public function listProducts()
     {
         $id = Auth::id(); // Se obtienen el ID del usuario loggeado
@@ -83,7 +84,6 @@ class ProductoController extends Controller
                  ->id;
 
         $producto = DB::table('productos')->where('proveedor_id','=',$idProveedor)->get();
-
         return $producto;
     }
 
@@ -99,7 +99,7 @@ class ProductoController extends Controller
         return $query;
     }
 
-    // Buscador de productos para el Proveedor
+    // Buscar los productos del proveedor en específico
     public function BuscarProductosProveedor(Request $request)
     {
         $id = 1; // el $id Va a ser del proveedor
@@ -113,10 +113,9 @@ class ProductoController extends Controller
         return $query;
     }
 
-    
     # yo como cliente quiero un buscador de proveedores por producto
-    public function BuscarProveedorProducto(Request $request){
-
+    public function BuscarProveedorProducto(Request $request)
+    {
         $nombre = $request->nombre;
         $query = DB::table('proveedores')
         ->join('productos','productos.proveedor_id','proveedores.id')
@@ -140,6 +139,5 @@ class ProductoController extends Controller
         ->get();
             
         return $query;
-        
     }
 }
