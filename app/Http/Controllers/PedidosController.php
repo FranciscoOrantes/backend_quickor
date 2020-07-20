@@ -16,18 +16,20 @@ class PedidosController extends Controller
        }else{
            $num_pedido_actual = $num_pedido_actual+1;
        }
-
-      
-        foreach ($request->json as $param => $paramdata){
+       $data = request()->all();
+       $json = $request->input('json', null);
+       $params = json_decode($json);
+       $params_array = (array)json_decode($json, true);
+        foreach ($data as $param => $paramdata){
             $pedido = new Pedidos();
-            $pedido->producto_id = $paramdata['producto_id'];
-            $pedido->proveedor_id = $paramdata['proveedor_id'];
-            $pedido->gerente_id = $paramdata['gerente_id'];
-            $pedido->status = $paramdata['status'];
-            $pedido->status_pago = $paramdata['status_pago'];
-            $pedido->fecha = $paramdata['fecha'];
-            $pedido->num_pedido = $paramdata['num_pedido'];
-            $pedido->cantidad = $paramdata['cantidad'];
+            $pedido->producto_id = dd($paramdata['producto_id']);
+            $pedido->proveedor_id = dd($paramdata['proveedor_id']);
+            $pedido->gerente_id = dd($paramdata['gerente_id']);
+            $pedido->status = dd($paramdata['status']);
+            $pedido->status_pago = dd($paramdata['status_pago']);
+            $pedido->fecha = dd($paramdata['fecha']);
+            $pedido->num_pedido = dd($paramdata['num_pedido']);
+            $pedido->cantidad = dd($paramdata['cantidad']);
             
             $pedido->save();
        }
