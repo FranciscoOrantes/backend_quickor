@@ -17,16 +17,18 @@ class PedidosController extends Controller
            $num_pedido_actual = $num_pedido_actual+1;
        }
        $data = request()->all();
+       $contador = 0;
        foreach ($data['datos']['data'] as $key => $value) {
+           $contador = $contador+1;
            $pedido = new Pedidos();
-            $pedido->producto_id = dd($value['producto_id']);
-            $pedido->proveedor_id = dd($value['proveedor_id']);
-            $pedido->gerente_id = dd($value['gerente_id']);
-            $pedido->status = dd($value['status']);
-            $pedido->status_pago = dd($value['status_pago']);
-            $pedido->fecha = dd($value['fecha']);
-            $pedido->num_pedido = dd($value['num_pedido']);
-            $pedido->cantidad = dd($value['cantidad']);
+            $pedido->producto_id = dd($value[$contador]['producto_id']);
+            $pedido->proveedor_id = dd($value[$contador]['proveedor_id']);
+            $pedido->gerente_id = dd($value[$contador]['gerente_id']);
+            $pedido->status = dd($value[$contador]['status']);
+            $pedido->status_pago = dd($value[$contador]['status_pago']);
+            $pedido->fecha = dd($value[$contador]['fecha']);
+            $pedido->num_pedido = dd($value[$contador]['num_pedido']);
+            $pedido->cantidad = dd($value[$contador]['cantidad']);
             
             $pedido->save();
        }
