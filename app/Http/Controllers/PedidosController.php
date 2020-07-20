@@ -16,13 +16,13 @@ class PedidosController extends Controller
        }else{
            $num_pedido_actual = $num_pedido_actual+1;
        }
-       $data = $request->input('json', null);
-       
-       $params_array = (array)json_decode($data, true);
-       $contador = 0;
-        foreach ($params_array as $param){
-            printf('DATOS ' + $param[$contador]['status']);
-           $contador = $contador+1;
+       $data = request()->all();
+       foreach ($data['datos']['data'] as $key => $value) {
+           printf(dd($value['status']));
+       }
+        /*foreach ($params_array as $param){
+            print('DATOS ' + $param['status']);
+           
             /* $pedido = new Pedidos();
             $pedido->producto_id = dd($paramdata['producto_id']);
             $pedido->proveedor_id = dd($paramdata['proveedor_id']);
@@ -34,7 +34,7 @@ class PedidosController extends Controller
             $pedido->cantidad = dd($paramdata['cantidad']);
             
             $pedido->save();*/
-       }
+       
        $pedidos = Pedidos::all();
        return $data;
     
