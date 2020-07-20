@@ -18,7 +18,7 @@ class PedidosController extends Controller
        }
        $data = request()->all();
        $json = $request->input('json', null);
-       $params = json_decode($json);
+      /* $params = json_decode($json);
        $params_array = (array)json_decode($json, true);
         foreach ($data as $param => $paramdata){
             $pedido = new Pedidos();
@@ -32,9 +32,9 @@ class PedidosController extends Controller
             $pedido->cantidad = dd($paramdata['cantidad']);
             
             $pedido->save();
-       }
+       }*/
        $pedidos = Pedidos::all();
-       return $pedidos;
+       return $data;
     
     }
 }
