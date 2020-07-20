@@ -16,7 +16,7 @@ class PedidosController extends Controller
        }else{
            $num_pedido_actual = $num_pedido_actual+1;
        }
-       $data = request()->all();
+       $data = $request->input('json', null);
        
        $params_array = (array)json_decode($data, true);
         foreach ($params_array as $param){
