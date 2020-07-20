@@ -17,11 +17,11 @@ class PedidosController extends Controller
            $num_pedido_actual = $num_pedido_actual+1;
        }
        $data = request()->all();
-       $json = $request->input('json', null);
-      /* $params = json_decode($json);
-       $params_array = (array)json_decode($json, true);
-        foreach ($data as $param => $paramdata){
-            $pedido = new Pedidos();
+       
+       $params_array = (array)json_decode($data, true);
+        foreach ($params_array as $param){
+            print('DATOS ' + $param['status']);
+           /* $pedido = new Pedidos();
             $pedido->producto_id = dd($paramdata['producto_id']);
             $pedido->proveedor_id = dd($paramdata['proveedor_id']);
             $pedido->gerente_id = dd($paramdata['gerente_id']);
@@ -31,8 +31,8 @@ class PedidosController extends Controller
             $pedido->num_pedido = dd($paramdata['num_pedido']);
             $pedido->cantidad = dd($paramdata['cantidad']);
             
-            $pedido->save();
-       }*/
+            $pedido->save();*/
+       }
        $pedidos = Pedidos::all();
        return $data;
     
