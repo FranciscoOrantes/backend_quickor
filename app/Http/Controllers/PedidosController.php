@@ -18,7 +18,7 @@ class PedidosController extends Controller
        }
        $data = request()->all();
        foreach ($data['datos']['data'] as $key => $value) {
-           printf(dd($value['status']));
+           printf(dd($value['producto_id']));
        }
         /*foreach ($params_array as $param){
             print('DATOS ' + $param['status']);
