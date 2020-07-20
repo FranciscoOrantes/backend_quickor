@@ -98,3 +98,5 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 Route::middleware('jwt.auth:api')->post('/registrar-pedido', 'PedidosController@register', function (Request $request) {
     return $request->marca();
  });
+
+ //Route::post('/registrar-pedidoprueba', 'PedidosController@register');
