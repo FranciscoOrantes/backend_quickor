@@ -18,25 +18,22 @@ class PedidosController extends Controller
        }
        $data = request()->all();
        foreach ($data['datos']['data'] as $key => $value) {
-           printf(dd($value['producto_id']));
-       }
-        /*foreach ($params_array as $param){
-            print('DATOS ' + $param['status']);
-           
-            /* $pedido = new Pedidos();
-            $pedido->producto_id = dd($paramdata['producto_id']);
-            $pedido->proveedor_id = dd($paramdata['proveedor_id']);
-            $pedido->gerente_id = dd($paramdata['gerente_id']);
-            $pedido->status = dd($paramdata['status']);
-            $pedido->status_pago = dd($paramdata['status_pago']);
-            $pedido->fecha = dd($paramdata['fecha']);
-            $pedido->num_pedido = dd($paramdata['num_pedido']);
-            $pedido->cantidad = dd($paramdata['cantidad']);
+           $pedido = new Pedidos();
+            $pedido->producto_id = dd($value['producto_id']);
+            $pedido->proveedor_id = dd($value['proveedor_id']);
+            $pedido->gerente_id = dd($value['gerente_id']);
+            $pedido->status = dd($value['status']);
+            $pedido->status_pago = dd($value['status_pago']);
+            $pedido->fecha = dd($value['fecha']);
+            $pedido->num_pedido = dd($value['num_pedido']);
+            $pedido->cantidad = dd($value['cantidad']);
             
-            $pedido->save();*/
+            $pedido->save();
+       }
+        
        
        $pedidos = Pedidos::all();
-       return $data;
+       return $pedidos;
     
     }
 }
