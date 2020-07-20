@@ -21,7 +21,7 @@ class PedidosController extends Controller
        $params_array = (array)json_decode($data, true);
        $contador = 0;
         foreach ($params_array as $param){
-            print('DATOS ' + $param[$contador]['status']);
+            printf('DATOS ' + $param[$contador]['status']);
            $contador = $contador+1;
             /* $pedido = new Pedidos();
             $pedido->producto_id = dd($paramdata['producto_id']);
