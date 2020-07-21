@@ -23,7 +23,12 @@ class NegociosController extends Controller
         return $negocios;
     }
 
-
+    public function show($id){
+        $negocios = Negocios::select('negocios.*')
+        ->where('gerente_id','=',$id)
+        ->get();
+        return $negocios;
+    }
     public function update(Request $request, $id)
     {
         $negocios = Negocios::find($id);

@@ -51,6 +51,7 @@ Route::middleware('jwt.auth:api')->put('/actualizar-negocio/{id}', 'NegociosCont
         return $request->negocios();
 });
 Route::middleware('jwt.auth:api')->delete('borrar-negocio/{id}', 'NegociosController@destroy');
+Route::middleware('jwt.auth:api')->get('datos-negocio/{id}', 'NegociosController@show');
 
 // --- Lo acabo de agregar ---
 Route::middleware('jwt.auth:api')->post('/buscar-negocios', 'NegociosController@BuscarProveedorNegocio');
