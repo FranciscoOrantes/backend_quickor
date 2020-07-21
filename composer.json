@@ -15,6 +15,7 @@
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
+        "paypal/rest-api-sdk-php": "*",
         "spatie/laravel-permission": "^3.13",
         "tymon/jwt-auth": "^1.0"
     },
@@ -37,7 +38,12 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "PayPal\\" : "src/Components/PayPal/",
+    "PayPal\\Api\\" : "src/Components/PayPal/Api/", 
+    "PayPal\\Rest\\" : "src/Components/PayPal/Rest/", 
+    "PayPal\\Auth\\" : "src/Components/PayPal/Auth/",
+    "PayPal\\Exception\\" : "src/Components/PayPal/Exception/"
         },
         "classmap": [
             "database/seeds",

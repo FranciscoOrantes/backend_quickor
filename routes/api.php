@@ -32,15 +32,15 @@ Route::middleware('jwt.auth:api')->put('/desactivar-cuenta-gerente/{id}', 'Geren
 Route::middleware('jwt.auth:api')->put('/actualizar-proveedor/{id}', 'ProveedorController@update', function (Request $request) {
     return $request->proveedores();
 });
-Route::middleware('jwt.auth:api')->get('/datos-proveedor/{id}', 'GerenteController@show', function (Request $request) {
-    return $request->gerente();
+Route::middleware('jwt.auth:api')->get('/datos-proveedor/{id}', 'ProveedorController@show', function (Request $request) {
+    return $request->proveedor();
 });
 
 Route::middleware('jwt.auth:api')->put('/actualizar-gerente/{id}', 'GerenteController@update', function (Request $request) {
     return $request->gerente();
 });
-Route::middleware('jwt.auth:api')->get('/datos-gerente/{id}', 'ProveedorController@show', function (Request $request) {
-    return $request->proveedores();
+Route::middleware('jwt.auth:api')->get('/datos-gerente/{id}', 'GerenteController@show', function (Request $request) {
+    return $request->gerente();
 });
 Route::post('/registro-gerente', 'GerenteController@register');
 
@@ -100,3 +100,5 @@ Route::middleware('jwt.auth:api')->post('/registrar-pedido', 'PedidosController@
  });
 
  //Route::post('/registrar-pedidoprueba', 'PedidosController@register');
+Route::get('/paypal/pay', 'PaypalController@payWithPayPal');
+Route::get('/paypal/status', 'PaypalController@payPalStatus');
