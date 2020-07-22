@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\DesactivarCuenta;
-
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Mail\Registro;
 use App\Proveedor;
@@ -52,6 +52,7 @@ class ProveedorController extends Controller
         $usuario = User::find($id);
         $usuario->status = 1;
         $usuario->update();
+        Log::info('Se ha desactivado la cuenta de: '.$email);
         Mail::to($email)->send(new DesactivarCuenta($_SERVER['REMOTE_ADDR']));
         return $usuario;        
 

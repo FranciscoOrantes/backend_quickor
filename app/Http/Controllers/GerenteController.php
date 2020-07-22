@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Gerente;
 use App\User;
 use Mail;
+use Illuminate\Support\Facades\Log;
 class GerenteController extends Controller
 {
     public function register(Request $request) {
@@ -47,6 +48,7 @@ class GerenteController extends Controller
         $usuario = User::find($id);
         $usuario->status = 1;
         $usuario->update();
+        Log::info('Se ha desactivado la cuenta de: '.$email);
         Mail::to($email)->send(new DesactivarCuenta($_SERVER['REMOTE_ADDR']));
         return $usuario;  
     }
