@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\DB;
 use App\Mail\CambiarPassword;
 use Illuminate\Http\Request;
+use App\Mail\DesactivarCuenta;
 use Mail;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Support\Facades\Log;
@@ -42,8 +43,7 @@ protected $lockoutTime=60;
         ], 401);
         }else{
             $this->clearLoginAttempts($request);
-            Log::info('Ha iniciado sesión con éxito '.$request->email);
-            Mail::to($request->email)->send(new NotificacionSesion($_SERVER['REMOTE_ADDR']));
+            
             $usuario = User::select('tipo_usuario','id')->where('email', $request->email)->get();    
             if($usuario[0]->tipo_usuario=='gerente'){
                 $usuario = User::select('users.tipo_usuario','gerentes.id','users.status','gerentes.user_id')
@@ -55,7 +55,10 @@ protected $lockoutTime=60;
                 ->where('email', $request->email)->first()->toArray();
             }
             if($usuario['status']==0){
-                printf('Hola');
+                Log::info('Ha iniciado sesión con éxito '.$request->email);
+                Mail::to($request->email)->send(new NotificacionSesion($_SERVER['REMOTE_ADDR']));
+            }else{
+                Mail::to($request->email)->send(new DesactivarCuenta($_SERVER['REMOTE_ADDR']));
             }
             $token =  [
                 'token' => $jwt_token,
