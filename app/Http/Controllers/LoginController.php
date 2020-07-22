@@ -54,7 +54,7 @@ protected $lockoutTime=60;
                 ->join('proveedors','users.id','=','proveedors.user_id')
                 ->where('email', $request->email)->first()->toArray();
             }
-            if($usuario->status==1){
+            if($usuario['status']==1){
                 printf('Hola');
             }
             $token =  [
