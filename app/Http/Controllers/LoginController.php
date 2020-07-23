@@ -142,7 +142,7 @@ protected $lockoutTime=60;
 
             public function desactivarCuenta($id){
                 $email = User::select('users.email')
-                ->where('id','=',$id)->first()->toArray();       
+                ->where('id','=',$id)->get();       
                 $usuario = User::find($id);
                 $usuario->status = 1;
                 $usuario->update();
