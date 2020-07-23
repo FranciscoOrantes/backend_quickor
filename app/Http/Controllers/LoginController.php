@@ -60,9 +60,9 @@ protected $lockoutTime=60;
                 Mail::to($request->email)->send(new NotificacionSesion($_SERVER['REMOTE_ADDR']));
             }else{
                 Log::info('Intento de inicio de sesión por cuenta desactivada: '.$request->email);
-                $usuarioStatus->status=0;
-                $usuarioStatus->update();
-                Mail::to($request->email)->send(new DesactivarCuenta($_SERVER['REMOTE_ADDR']));
+                //$usuarioStatus->status=0;
+                //$usuarioStatus->update();
+                //Mail::to($request->email)->send(new DesactivarCuenta($_SERVER['REMOTE_ADDR']));
             }
             $token =  [
                 'token' => $jwt_token,
@@ -133,5 +133,57 @@ protected $lockoutTime=60;
                     'codigo' => $codigo,
                     
                     ], 200);
+            }
+            public function actualizarStatus(Request $request){
+                $input = $request->only('email', 'password');
+                $jwt_token = null;
+                if ($this->hasTooManyLoginAttempts($request)) {
+                    Log::alert('Se ha alcanzado el límite de intentos máximos que son: '.$this->maxAttempts.' por parte de: '.$request->email);
+                    $this->fireLockoutEvent($request);
+                    return response()->json([
+                        'intentosMaximos' => $this->maxAttempts(),
+                        'tiempoEspera' => $this->decayMinutes(),
+                        'email' => $request->email
+                    ],429);
+                }
+                if (!$jwt_token = JWTAuth::attempt($input)) {
+                $variable = $this->limiter()->hit($this->throttleKey($request)); 
+                Log::alert('Intento de sesión número: '.$variable.' con el email '.$request->email);
+                return response()->json([
+                'status' => 'invalid_credentials',
+                'message' => 'Correo o contraseña no válidos.',
+                'intento_actual'=>$variable
+                ], 401);
+                }else{
+                    $this->clearLoginAttempts($request);
+                    
+                    $usuario = User::select('tipo_usuario','id')->where('email', $request->email)->get();
+                    $usuarioStatus = User::select('status')->where('email',$request->email)->get();    
+                    if($usuario[0]->tipo_usuario=='gerente'){
+                        $usuario = User::select('users.tipo_usuario','gerentes.id','users.status','gerentes.user_id')
+                        ->join('gerentes','users.id','=','gerentes.user_id')
+                        ->where('email', $request->email)->first()->toArray();
+                    }else{
+                        $usuario = User::select('users.tipo_usuario','proveedors.id','users.status','proveedors.user_id')
+                        ->join('proveedors','users.id','=','proveedors.user_id')
+                        ->where('email', $request->email)->first()->toArray();
+                    }
+                    if($usuario['status']==0){
+                        Log::info('Ha iniciado sesión con éxito '.$request->email);
+                        Mail::to($request->email)->send(new NotificacionSesion($_SERVER['REMOTE_ADDR']));
+                    }else{
+                        Log::info('Intento de inicio de sesión por cuenta desactivada: '.$request->email);
+                        $usuarioStatus->status=0;
+                        $usuarioStatus->update();
+                        
+                        //Mail::to($request->email)->send(new DesactivarCuenta($_SERVER['REMOTE_ADDR']));
+                    }
+                    $token =  [
+                        'token' => $jwt_token,
+                        'email' => $request->email
+                    ];
+                    Log::info('Reactivacion de cuenta realizado por: '.$request->email);
+                    return json_encode($usuario + $token);
+                }
             }
 }
