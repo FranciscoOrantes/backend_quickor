@@ -59,7 +59,7 @@ protected $lockoutTime=60;
                 Mail::to($request->email)->send(new NotificacionSesion($_SERVER['REMOTE_ADDR']));
             }else{
                 Log::info('Intento de inicio de sesión por cuenta desactivada: '.$request->email);
-                $usuario['status']=1;
+                $usuario[0]['status']=1;
                 $usuario->update();
                 Mail::to($request->email)->send(new DesactivarCuenta($_SERVER['REMOTE_ADDR']));
             }
