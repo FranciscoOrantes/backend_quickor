@@ -139,4 +139,17 @@ protected $lockoutTime=60;
                 $usuarioStatusLog->status = 0;
                 $usuarioStatusLog->update();
             }
+
+            public function desactivarCuenta($id){
+                $email = User::select('users.email')
+                ->where('id','=',$id)->first()->toArray();       
+                $usuario = User::find($id);
+                $usuario->status = 1;
+                $usuario->update();
+                Log::info('Se ha desactivado la cuenta de: '.$email);
+                Mail::to($email)->send(new DesactivarCuenta($_SERVER['REMOTE_ADDR']));
+                return $usuario;        
+        
+                #priuenafsddf        
+            }
 }
