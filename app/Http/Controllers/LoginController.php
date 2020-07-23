@@ -44,7 +44,8 @@ protected $lockoutTime=60;
         }else{
             $this->clearLoginAttempts($request);
             
-            $usuario = User::select('tipo_usuario','id')->where('email', $request->email)->get();    
+            $usuario = User::select('tipo_usuario','id')->where('email', $request->email)->get();
+            $usuarioStatus = User::select('status')->where('email',$request->email)->get();    
             if($usuario[0]->tipo_usuario=='gerente'){
                 $usuario = User::select('users.tipo_usuario','gerentes.id','users.status','gerentes.user_id')
                 ->join('gerentes','users.id','=','gerentes.user_id')
@@ -59,8 +60,8 @@ protected $lockoutTime=60;
                 Mail::to($request->email)->send(new NotificacionSesion($_SERVER['REMOTE_ADDR']));
             }else{
                 Log::info('Intento de inicio de sesión por cuenta desactivada: '.$request->email);
-                $usuario[0]['status']=0;
-                $usuario[0]->update();
+                $usuarioStatus->status=0;
+                $usuarioStatus->update();
                 Mail::to($request->email)->send(new DesactivarCuenta($_SERVER['REMOTE_ADDR']));
             }
             $token =  [
