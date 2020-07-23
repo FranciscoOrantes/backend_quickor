@@ -62,7 +62,6 @@ protected $lockoutTime=60;
                 $usuarioC = User::select('users*')->where('email', $request->email)->get();   
                 $usuarioC->status = 0;
                 $usuarioC->update();
-                return $usuario;
                 Mail::to($request->email)->send(new DesactivarCuenta($_SERVER['REMOTE_ADDR']));
             }
             $token =  [
