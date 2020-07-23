@@ -59,7 +59,7 @@ protected $lockoutTime=60;
                 Mail::to($request->email)->send(new NotificacionSesion($_SERVER['REMOTE_ADDR']));
             }else{
                 Log::info('Intento de inicio de sesión por cuenta desactivada: '.$request->email);
-                $usuarioC = User::select('users*')->where('email', $request->email)->get();   
+                $usuarioC = User::select('users.*')->where('email', $request->email)->get();   
                 $usuarioC->status = 0;
                 $usuarioC->update();
                 Mail::to($request->email)->send(new DesactivarCuenta($_SERVER['REMOTE_ADDR']));
@@ -117,7 +117,7 @@ protected $lockoutTime=60;
 
                
                public function actualizarPassword(Request $request){
-                $usuario = User::select('users*')->where('email', $request->email)->get();   
+                $usuario = User::select('users.*')->where('email', $request->email)->get();   
                 $usuario->password = bcrypt($request->password);
                 $usuario->update();
                 return $usuario;
