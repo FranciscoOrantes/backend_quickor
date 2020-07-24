@@ -100,3 +100,12 @@ Route::middleware('jwt.auth:api')->post('/registrar-pedido', 'PedidosController@
  //Route::post('/registrar-pedidoprueba', 'PedidosController@register');
 Route::get('/paypal/pay', 'PaypalController@payWithPayPal');
 Route::get('/paypal/status', 'PaypalController@payPalStatus');
+
+
+//API CONTACTOS
+Route::middleware('jwt.auth:api')->post('/agregar-contacto', 'ContactosController@register');
+    Route::middleware('jwt.auth:api')->delete('borrar-contacto/{id}', 'ContactosController@destroy');
+    Route::middleware('jwt.auth:api')->get('/lista-contactos-gerente/{id}', 'ContactosController@ListaContactosGerente');
+    Route::middleware('jwt.auth:api')->get('/lista-contactos-proveedor/{id}', 'ContactosController@ListaContactosProveedores');
+    Route::middleware('jwt.auth:api')->post('/buscar-contactos-gerente/{id}', 'ContactosController@buscarNombreContactosDelGerente');
+    Route::middleware('jwt.auth:api')->post('/buscar-contactos-proveedor/{id}', 'ContactosController@buscarNombreContactosDelProveedor');  
