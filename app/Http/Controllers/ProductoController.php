@@ -9,6 +9,7 @@ use App\Proveedor;
 use DB;
 use Proveedores;
 use App\Http\Controllers\Input;
+use Cloudder;
 class ProductoController extends Controller
 {
     public function register(Request $request)
@@ -29,7 +30,7 @@ class ProductoController extends Controller
             $file->move($destination, $name);
             $producto->logo = $name;
         }*/
-        
+        Cloudder::upload($request->logo);
 
         //$producto->logo = $request->logo;
         $producto->precio = $request->precio;
