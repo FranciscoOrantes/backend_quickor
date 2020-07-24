@@ -21,18 +21,17 @@ class ProductoController extends Controller
         $producto->cantidad_presentacion = $request->cantidad_presentacion;
         $producto->tamano_producto = $request->tamano_producto;
         $producto->categoria = $request->categoria;
-        $producto->logo = $request->logo;
         
-       /* if ($request->File('logo')) {
-            $file = $request->file('logo');
-            $name = time().'.'.$file->getClientOriginalExtension();
-            $destination = public_path('Logo_Producto/'); // Se encuentra en la carpeta -> public/Logo_Producto
-            $file->move($destination, $name);
-            $producto->logo = $name;
-        }*/
-        Cloudder::upload($request->logo);
-
-        //$producto->logo = $request->logo;
+        $this->validate($request,[
+            'image_name'=>'required|mimes:jpeg,bmp,jpg,png|between:1, 6000',
+        ]);
+ 
+        $image_name = $request->file('image_name')->getRealPath();;
+ 
+        Cloudder::upload($image_name, null);
+        list($width, $height) = getimagesize($image_name);
+        $image_url= Cloudder::show(Cloudder::getPublicId(), ["width" => $width, "height"=>$height]);
+        $producto->logo = $image_url;
         $producto->precio = $request->precio;
         $producto->marca_id = $request->marca_id;
         $producto->proveedor_id = $request->proveedor_id;
