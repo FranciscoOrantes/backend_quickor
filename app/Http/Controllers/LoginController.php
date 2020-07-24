@@ -117,11 +117,12 @@ protected $lockoutTime=60;
 
                
                public function actualizarPassword(Request $request){
-                $usuario = User::find($request->email);
-                
-                $usuario->password = bcrypt($request->password);
+                $usuario = User::select('users.*')
+                ->where('email', $request->email)->first();
+                   
+                $usuario[0]->password = bcrypt($request->password);
                 print($usuario);
-                $usuario->update();
+                $usuario[0]->update();
                 
                 return $usuario;
             }
