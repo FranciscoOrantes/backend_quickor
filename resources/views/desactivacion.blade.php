@@ -8,8 +8,7 @@
 <body>
     <p>Su cuenta ha sido desactivada</p>
     <p>Si usted no ha sido porfavor contacte a soporte</p>
-    <p>Si deseas volver a activar su cuenta por favor envie un correo para la reactivacion de su cuenta</p>
-    <p>Nuestro equipo de soporte responderá en la brevedad posible</p>
+    <p>Si desea volver a activar su cuenta por favor vuelva a iniciar sesión</p>
     <p>QUICKOR, AL ALCANCE DE TU TIENDA</p>
 </body>
 </html>
