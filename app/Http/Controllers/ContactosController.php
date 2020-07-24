@@ -32,10 +32,10 @@ class ContactosController extends Controller
         
         $nombre = $this->nombre;
         #echo($this->nombre);
-        $query= Contactos::select('contactos.*','proveedores.id','proveedores.nombre','proveedores.apellido_paterno', 
-        'proveedores.apellido_materno','proveedores.telefono','proveedores.direccion','proveedores.user_id','users.status')
-        ->join('proveedores','proveedores.id','contactos.proveedor_id')
-        ->join('users','users.id','proveedores.user_id')
+        $query= Contactos::select('contactos.*','proveedors.id','proveedors.nombre','proveedors.apellido_paterno', 
+        'proveedors.apellido_materno','proveedors.telefono','proveedors.direccion','proveedors.user_id','users.status')
+        ->join('proveedors','proveedors.id','contactos.proveedor_id')
+        ->join('users','users.id','proveedors.user_id')
         ->where('contactos.gerente_id','=',$id)
         ->where('users.status','=',0)
         ->get();
@@ -61,12 +61,12 @@ class ContactosController extends Controller
     
     public function buscarNombreContactosDelGerente(Request $request,$id){
         $nombre = $request->nombre;
-        $query= Contactos::select('contactos.*','proveedores.id','proveedores.nombre','proveedores.apellido_paterno', 
-        'proveedores.apellido_materno','proveedores.telefono','proveedores.direccion','proveedores.user_id','users.status')
-        ->join('proveedores','proveedores.id','contactos.proveedor_id')
-        ->join('users','users.id','proveedores.user_id')
+        $query= Contactos::select('contactos.*','proveedors.id','proveedors.nombre','proveedors.apellido_paterno', 
+        'proveedors.apellido_materno','proveedors.telefono','proveedors.direccion','proveedors.user_id','users.status')
+        ->join('proveedors','proveedors.id','contactos.proveedor_id')
+        ->join('users','users.id','proveedors.user_id')
         ->where('contactos.gerente_id','=',$id)
-        ->where('proveedores.nombre','LIKE','%'.$nombre.'%')
+        ->where('proveedors.nombre','LIKE','%'.$nombre.'%')
         ->where('users.status','=',0)
         ->get();
         return $query;
