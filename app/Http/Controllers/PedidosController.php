@@ -34,9 +34,71 @@ class PedidosController extends Controller
        }
        $pedidos = Pedidos::all();
        return $pedidos;
-       
-      
-       
+    }
 
+    public function registrarPedidos(Request $request){
+        //status 0: En progreso
+        //status 1: Finalizado
+        //status 2: Cancelado
+        $num_pedido_actual =  Pedidos::max('num_pedido');
+        if($num_pedido_actual==null){
+            $num_pedido_actual=1;
+        }else{
+            $num_pedido_actual = $num_pedido_actual+1;
+        }
+        $pedido = new Pedidos();
+        $pedido->producto_id = $request->producto_id;
+        $pedido->proveedor_id = $request->proveedor_id;
+        $pedido->gerente_id = $request->gerente_id;
+        $pedido->status = '0';
+        $pedido->status_pago = $request->status_pago;
+        $pedido->fecha =$request->fechaActual;
+        $pedido->num_pedido = $num_pedido_actual;
+        $pedido->cantidad = $request->cantidad;
+        
+        $pedido->save();
+       
+       $pedidos = Pedidos::all();
+       return $pedidos;
+    }
+    public function listaPedidosDelGerente($id){
+    $pedidos = Pedidos::select('pedidos.*','proveedors.nombre','proveedors.apellido_paterno','proveedors.apellido_materno','productos.nombre','productos.presentacion','productos.marca_id','marcas.nombre')
+    ->join('proveedors','proveedors.id','pedidos.proveedor_id')
+    ->join('productos','productos.id','pedidos.producto_id')
+    ->join('marcas','marcas.id','productos.marca_id')
+    ->where('pedidos.status','=','0')
+    ->where('pedidos.gerente_id','=',$id)
+    ->get();
+    return $pedidos;
+}
+    public function listaPedidosDelProveedor($id){
+        $pedidos = Pedidos::select('pedidos.*','gerentes.nombre','gerentes.apellido_paterno','gerentes.apellido_materno','productos.nombre','productos.presentacion','productos.marca_id','marcas.nombre')
+        ->join('gerentes','gerentes.id','pedidos.gerente_id')
+        ->join('productos','productos.id','pedidos.producto_id')
+        ->join('marcas','marcas.id','productos.marca_id')
+        ->where('pedidos.status','=','0')
+        ->where('pedidos.proveedor_id','=',$id)
+        ->get();
+        return $pedidos;
+    }
+    public function listaPedidosFinalizadosDelGerente($id){
+        $pedidos = Pedidos::select('pedidos.*','proveedors.nombre','proveedors.apellido_paterno','proveedors.apellido_materno','productos.nombre','productos.presentacion','productos.marca_id','marcas.nombre')
+        ->join('proveedors','proveedors.id','pedidos.proveedor_id')
+        ->join('productos','productos.id','pedidos.producto_id')
+        ->join('marcas','marcas.id','productos.marca_id')
+        ->where('pedidos.status','=','1')
+        ->where('pedidos.gerente_id','=',$id)
+        ->get();
+        return $pedidos;
+    }
+    public function listaPedidosFinalizadosDelProveedor($id){
+        $pedidos = Pedidos::select('pedidos.*','gerentes.nombre','gerentes.apellido_paterno','gerentes.apellido_materno','productos.nombre','productos.presentacion','productos.marca_id','marcas.nombre')
+        ->join('gerentes','gerentes.id','pedidos.gerente_id')
+        ->join('productos','productos.id','pedidos.producto_id')
+        ->join('marcas','marcas.id','productos.marca_id')
+        ->where('pedidos.status','=','1')
+        ->where('pedidos.proveedor_id','=',$id)
+        ->get();
+        return $pedidos;
     }
 }
