@@ -69,10 +69,8 @@ protected $lockoutTime=60;
                 $email = $request->email;
                 Mail::to($email)->send(new ActivarCuenta($codigo));
                 print($codigo);
-                $info_codigo = [
-                    'codigo'=>$codigo
-                ];
-                $nuevaInfo = json_encode($usuario+$info_codigo);
+                
+                $nuevaInfo = json_encode($usuario+ $codigo);
                 print($nuevaInfo);
             }
             $token =  [
