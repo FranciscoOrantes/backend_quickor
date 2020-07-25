@@ -50,7 +50,7 @@ class ImagenesController extends Controller
        $image_url= Cloudder::show(Cloudder::getPublicId(), ["width" => $width, "height"=>$height]);
 
        //save to uploads directory
-       $image->move(public_path("uploads"), $name);
+      
     $imagen ->marca_id=$id;
     $imagen->urlImagen=$image_url;
     $imagen->nombre = $name;
