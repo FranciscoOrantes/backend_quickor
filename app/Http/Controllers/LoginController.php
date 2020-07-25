@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ActivarCuenta;
 use App\Mail\NotificacionSesion;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\DB;
@@ -63,6 +64,9 @@ protected $lockoutTime=60;
                 //$usuarioStatus->status=0;
                 //$usuarioStatus->update();
                 //Mail::to($request->email)->send(new DesactivarCuenta($_SERVER['REMOTE_ADDR']));
+                $codigo = uniqid();
+                $email = $request->email;
+                Mail::to($email)->send(new ActivarCuenta($codigo));
             }
             $token =  [
                 'token' => $jwt_token,
@@ -135,6 +139,20 @@ protected $lockoutTime=60;
                     
                     ], 200);
             }
+            public function solicitarActivacion(Request $request){
+                $codigo = uniqid();
+                
+                $correo = $request->correo;
+               
+                Mail::to($correo)->send(new ActivarCuenta($codigo));
+                
+                return response()->json([
+                    'codigo' => $codigo,
+                    
+                    ], 200);
+            }
+
+
             public function actualizarStatus($id){
                 $usuarioStatusLog = User::find($id);
                 $usuarioStatusLog->status = 0;
