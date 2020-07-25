@@ -22,6 +22,8 @@ class Proveedores extends Migration
             $table->string('apellido_materno');
             $table->string('telefono');
             $table->string('direccion');
+            $table->string('longitud');
+            $table->string('latitud');
             $table->integer('user_id')->unsigned();            
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

@@ -17,6 +17,8 @@ class NegociosController extends Controller
         $negocios->direccion = $request->direccion;
         $negocios->telefono = $request->telefono;
         $negocios->rfc = $request->rfc;
+        $negocios->longitud = $request->longitud;
+        $negocios->latitud = $request->latitud;
         $negocios->gerente_id = $request->gerente_id;
 
         $negocios->save();
@@ -37,6 +39,8 @@ class NegociosController extends Controller
         $negocios->direccion = $request->direccion;
         $negocios->telefono = $request->telefono;
         $negocios->rfc = $request->rfc;
+        $negocios->longitud = $request->longitud;
+        $negocios->latitud = $request->latitud;
         $negocios->gerente_id = $request->gerente_id;
 
         $negocios->update();

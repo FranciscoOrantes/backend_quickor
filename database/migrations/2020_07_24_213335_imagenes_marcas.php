@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Imagenes extends Migration
+class ImagenesMarcas extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class Imagenes extends Migration
      */
     public function up()
     {
-        Schema::create('imagenes', function (Blueprint $table) {
+        Schema::create('imagenes_marcas', function (Blueprint $table) {
             $table->id();
-            $table->integer('producto_id')->unsigned();            
-            $table->foreign('producto_id')->references('id')->on('productos'); 
-            $table->string('urlImagen');
+            $table->integer('marca_id')->unsigned();            
+            $table->foreign('marca_id')->references('id')->on('marcas'); 
+            $table->string('url_marca');
             $table->string('nombre');
             $table->timestamps();
         });
@@ -30,6 +30,6 @@ class Imagenes extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('imagenes');
+        Schema::dropIfExists('imagenes_marcas');
     }
 }

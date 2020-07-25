@@ -20,6 +20,8 @@ class Negocios extends Migration
             $table->string('direccion');
             $table->string('telefono');
             $table->string('rfc'); 
+            $table->string('longitud');
+            $table->string('latitud');
             $table->integer('gerente_id')->unsigned();            
             $table->foreign('gerente_id')->references('id')->on('gerentes'); 
             $table->timestamps();

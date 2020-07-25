@@ -4,14 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 use Spatie\Permission\Traits\HasRoles;
-class Negocios extends Model
+
+class Imagenes extends Model
 {
     use Notifiable;
     use HasRoles;
 
     protected $fillable = [
-        'nombre', 'direccion', 'telefono', 'rfc', 'longitud','latitud','gerente_id'
+        'producto_id', 'urlImagen','nombre'
     ];
 
     public function getJWTIdentifier()

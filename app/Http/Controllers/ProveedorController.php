@@ -26,6 +26,8 @@ class ProveedorController extends Controller
         $proveedor->apellido_materno = $request->apellido_materno;
         $proveedor->telefono = $request->telefono;
         $proveedor->direccion = $request->direccion;
+        $proveedor->longitud = $request->longitud;
+        $proveedor->latitud = $request->latitud;
         $proveedor->user_id = $id;
         $proveedor->save();
         Mail::to($request->email)->send(new Registro($_SERVER['REMOTE_ADDR']));
@@ -38,6 +40,8 @@ class ProveedorController extends Controller
         $proveedor->apellido_materno = $request->apellido_materno;
         $proveedor->telefono = $request->telefono;
         $proveedor->direccion = $request->direccion;
+        $proveedor->longitud = $request->longitud;
+        $proveedor->latitud = $request->latitud;
         $proveedor->update();
         return $proveedor;
     }

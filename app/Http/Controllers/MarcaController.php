@@ -57,6 +57,14 @@ class MarcaController extends Controller
         $marca = Marca::find($id);
         $marca->delete();
     }
+    public function buscar(Request $request){
+        $nombre = $request->nombre;
+        $query = Marca::select('marca.*')
+        ->where('nombre','LIKE','%'.$nombre.'%')
+        ->get();
+        
+        return $query;
+    }
 
 
 

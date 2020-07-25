@@ -19,7 +19,7 @@ class Proveedor extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'nombre','apellido_paterno','apellido_materno','telefono','direccion','user_id'
+        'nombre','apellido_paterno','apellido_materno','telefono','direccion','longitud','latitud','user_id'
     ];
 
     
