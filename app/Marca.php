@@ -12,7 +12,7 @@ class Marca extends Model
     use HasRoles;
 
     protected $fillable = [
-        'nombre',
+        'nombre','logo'
     ];
 
     public function getJWTIdentifier()

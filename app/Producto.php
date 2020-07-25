@@ -12,7 +12,7 @@ class Producto extends Model
     use HasRoles;
 
     protected $fillable = [
-        'nombre', 'presentacion', 'cantidad_presentacion', 'tamano_producto','categoria', 'precio', 'marca_id', 'proveedor_id'
+        'nombre', 'presentacion', 'cantidad_presentacion', 'tamano_producto','categoria','logo', 'precio', 'marca_id', 'proveedor_id'
     ];
 
     public function getJWTIdentifier()

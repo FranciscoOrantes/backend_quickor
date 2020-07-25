@@ -13,9 +13,8 @@ class MarcaController extends Controller
     {
         $marca = new Marca();
         $marca->nombre = $request->nombre;
-        $marca->save();
-        $id = $marca->id;
-        $imagen = new Imagenes_marcas();
+        
+       
     $this->validate($request,[
         'image_name'=>'required|mimes:jpeg,bmp,jpg,png|between:1, 6000',
     ]);
@@ -31,11 +30,8 @@ class MarcaController extends Controller
        $image_url= Cloudder::show(Cloudder::getPublicId(), ["width" => $width, "height"=>$height]);
 
        //save to uploads directory
-      
-    $imagen ->marca_id=$id;
-    $imagen->url_marca=$image_url;
-    $imagen->nombre = $name;
-    $imagen->save();
+      $marca->logo = $image_url;
+       $marca->save();
         
         return $marca;
 

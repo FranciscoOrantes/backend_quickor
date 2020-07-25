@@ -108,19 +108,14 @@ Route::get('/paypal/status', 'PaypalController@payPalStatus');
 //API CONTACTOS
 Route::middleware('jwt.auth:api')->post('/agregar-contacto', 'ContactosController@register');
 Route::middleware('jwt.auth:api')->delete('borrar-contacto/{id}', 'ContactosController@destroy');
-    Route::middleware('jwt.auth:api')->get('/lista-contactos-gerente/{id}', 'ContactosController@ListaContactosGerente');
-    Route::middleware('jwt.auth:api')->get('/lista-contactos-proveedor/{id}', 'ContactosController@ListaContactosProveedores');
-    Route::middleware('jwt.auth:api')->post('/buscar-contactos-gerente/{id}', 'ContactosController@buscarNombreContactosDelGerente');
-    Route::middleware('jwt.auth:api')->post('/buscar-contactos-proveedor/{id}', 'ContactosController@buscarNombreContactosDelProveedor');
+Route::middleware('jwt.auth:api')->get('/lista-contactos-gerente/{id}', 'ContactosController@ListaContactosGerente');
+Route::middleware('jwt.auth:api')->get('/lista-contactos-proveedor/{id}', 'ContactosController@ListaContactosProveedores');
+Route::middleware('jwt.auth:api')->post('/buscar-contactos-gerente/{id}', 'ContactosController@buscarNombreContactosDelGerente');
+Route::middleware('jwt.auth:api')->post('/buscar-contactos-proveedor/{id}', 'ContactosController@buscarNombreContactosDelProveedor');
     
 //API PEDIDOS
 Route::middleware('jwt.auth:api')->post('/realizar-pedido', 'PedidosController@registrarPedidos');
 Route::middleware('jwt.auth:api')->get('/pedidos-proceso-gerente/{id}', 'PedidosController@listaPedidosDelGerente');
 Route::middleware('jwt.auth:api')->get('/pedidos-proceso-proveedor/{id}', 'PedidosController@listaPedidosDelProveedor');
 Route::middleware('jwt.auth:api')->get('/pedidos-finalizados-gerente/{id}', 'PedidosController@listaPedidosFinalizadosDelGerente');
-Route::middleware('jwt.auth:api')->get('/pedidos-finalizados-proveedor/{id}', 'PedidosController@listaPedidosFinalizadosDelProveedor');   
-
-
-//API IMAGENES
-Route::middleware('jwt.auth:api')->post('/subir-imagen-producto/{id}', 'ImagenesController@subirImagenProducto');
-Route::middleware('jwt.auth:api')->post('/subir-imagen-marca/{id}', 'ImagenesController@subirImagenMarca');
+Route::middleware('jwt.auth:api')->get('/pedidos-finalizados-proveedor/{id}', 'PedidosController@listaPedidosFinalizadosDelProveedor');
