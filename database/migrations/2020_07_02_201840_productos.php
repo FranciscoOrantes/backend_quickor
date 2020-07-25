@@ -21,7 +21,6 @@ class Productos extends Migration
             $table->integer('cantidad_presentacion');
             $table->integer('tamano_producto');
             $table->string('categoria');          
-            $table->string('logo');
             $table->float('precio'); 
             $table->integer('marca_id')->unsigned();            
             $table->foreign('marca_id')->references('id')->on('marcas');

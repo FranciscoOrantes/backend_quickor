@@ -11,25 +11,14 @@ class MarcaController extends Controller
     {
         $marca = new Marca();
         $marca->nombre = $request->nombre;
-        $marca->logo = $request->logo;
         $marca->save();
-        /*if ($request->File('logo')) {
-            $file = $request->file('logo');
-            $name = time().'.'.$file->getClientOriginalExtension();
-            $destination = public_path('Logo_Marca/'); // Se encuentra en la carpeta -> public/Logo_Marca
-            $file->move($destination, $name);
-            $marca->logo = $name;
-        }*/
 
-        //$marca->logo = $request->logo;
+
         
         return $marca;
 
 
 
-        // Sólo es para la prueba local -> con vista PHP
-       /* $marca = Marca::all();
-        return view('TestCarga.marcas',compact('marca')); */
     }
 
 
@@ -37,16 +26,6 @@ class MarcaController extends Controller
     {
         $marca = Marca::find($id);
         $marca->nombre = $request->nombre;
-        $marca->logo = $request->logo;
-       /* if ($request->File('logo')) {
-            $file = $request->file('logo');
-            $name = time().'.'.$file->getClientOriginalExtension();
-            $destination = public_path('Logo_Marcas/'); // Se encuentra en la carpeta -> public/Logo_Marca
-            $file->move($destination, $name);
-            $marca->logo = $name;
-        }*/
-
-        //$marca->logo = $request->logo;
         $marca->update();
         return $marca;
     }
