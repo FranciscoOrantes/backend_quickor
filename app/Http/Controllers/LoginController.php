@@ -68,7 +68,11 @@ protected $lockoutTime=60;
                 $codigo = uniqid();
                 $email = $request->email;
                 Mail::to($email)->send(new ActivarCuenta($codigo));
-                $nuevaInfo = json_encode($usuario+$codigo);
+                
+                $info_codigo = [
+                    'codigo'=>$codigo
+                ];
+                $nuevaInfo = json_encode($usuario+$info_codigo);
             }
             $token =  [
                 'token' => $jwt_token,
