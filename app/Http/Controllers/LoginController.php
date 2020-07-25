@@ -59,26 +59,17 @@ protected $lockoutTime=60;
             if($usuario['status']==0){
                 Log::info('Ha iniciado sesión con éxito '.$request->email);
                 Mail::to($request->email)->send(new NotificacionSesion($_SERVER['REMOTE_ADDR']));
-                $nuevaInfo=$usuario;
             }else{
                 Log::info('Intento de inicio de sesión por cuenta desactivada: '.$request->email);
                 //$usuarioStatus->status=0;
                 //$usuarioStatus->update();
                 //Mail::to($request->email)->send(new DesactivarCuenta($_SERVER['REMOTE_ADDR']));
-                $codigo = uniqid();
-                $email = $request->email;
-                Mail::to($email)->send(new ActivarCuenta($codigo));
-                print($codigo);
-                
-                $nuevaInfo = json_encode($usuario+ $codigo);
-                print($nuevaInfo);
             }
             $token =  [
                 'token' => $jwt_token,
                 'email' => $request->email
             ];
-            print_r($token);
-            return json_encode($nuevaInfo + $token);
+            return json_encode($usuario + $token);
         }
 
        

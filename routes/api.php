@@ -21,6 +21,8 @@ Route::middleware('jwt.auth:api')->put('/desactivar-cuenta-proveedor/{id}', 'Pro
 });
 Route::post('/solicitar-cambio', 'LoginController@solicitarCambioPassword');
 Route::put('/actualizar-password', 'LoginController@actualizarPassword');
+Route::post('/solicitar-activacion', 'LoginController@solicitarActivacion');
+
 
 Route::middleware('jwt.auth:api')->put('/desactivar-cuenta/{id}', 'LoginController@desactivarCuenta', function (Request $request) {
     return $request->gerente();
