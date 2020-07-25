@@ -33,7 +33,7 @@ class MarcaController extends Controller
        //save to uploads directory
       
     $imagen ->marca_id=$id;
-    $imagen->urlImagen=$image_url;
+    $imagen->url_marca=$image_url;
     $imagen->nombre = $name;
     $imagen->save();
         
