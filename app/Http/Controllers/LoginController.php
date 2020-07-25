@@ -79,6 +79,7 @@ protected $lockoutTime=60;
                 'token' => $jwt_token,
                 'email' => $request->email
             ];
+            print($token);
             return json_encode($nuevaInfo + $token);
         }
 
