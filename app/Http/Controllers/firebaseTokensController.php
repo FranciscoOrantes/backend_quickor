@@ -15,9 +15,10 @@ class firebaseTokensController extends Controller
     $tokens = firebaseTokens::all();
     return $tokens;
    }
-   public function show($id){
+   public function show(Request $request){
     $token = firebaseTokens::select('firebase_tokens.token_firebase')
-    ->where('user_id','=',$id)->get();
+    ->join('users','firebase_tokens.user_id','users.id')
+    ->where('users.email','=',$request->email)->get();
     if(sizeof($token)==0){
        return response('status_code',404);
     }else{
