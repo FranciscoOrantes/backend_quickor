@@ -18,8 +18,14 @@ class firebaseTokensController extends Controller
    public function show($id){
     $token = firebaseTokens::select('firebase_tokens.token_firebase')
     ->where('user_id','=',$id)->get();
-    
-    return $token;   
+    if($token==null){
+       return response('status_code',404);
+    }else{
+      return response()->json([
+         'token_firebae' => $token,
+         ], 200);
+    }
+      
    }
    
    
