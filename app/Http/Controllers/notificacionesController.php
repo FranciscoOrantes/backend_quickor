@@ -28,8 +28,11 @@ class notificacionesController extends Controller
 {
     $token = firebaseTokens::select('firebaseTokens.token_firebase')
     ->where('firebaseTokens.user_id','=',$id);
+    $recipients=[
+        $token,
+    ];
     fcm()
-        ->to($token)
+        ->to($recipients)
         ->notification([
             'title' => $request->input('title'),
             'body' => $request->input('body')
