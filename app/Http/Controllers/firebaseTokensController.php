@@ -16,7 +16,7 @@ class firebaseTokensController extends Controller
     return $tokens;
    }
    public function show($id){
-    $token = firebaseTokens::select('token_firebase')
+    $token = firebaseTokens::select('firebase_tokens.token_firebase')
     ->where('user_id','=',$id);
     return $token;   
    }
