@@ -119,3 +119,9 @@ Route::middleware('jwt.auth:api')->get('/pedidos-proceso-gerente/{id}', 'Pedidos
 Route::middleware('jwt.auth:api')->get('/pedidos-proceso-proveedor/{id}', 'PedidosController@listaPedidosDelProveedor');
 Route::middleware('jwt.auth:api')->get('/pedidos-finalizados-gerente/{id}', 'PedidosController@listaPedidosFinalizadosDelGerente');
 Route::middleware('jwt.auth:api')->get('/pedidos-finalizados-proveedor/{id}', 'PedidosController@listaPedidosFinalizadosDelProveedor');
+
+
+
+//NOTIFICACIONES Y TOKENS
+Route::middleware('jwt.auth:api')->post('/registrar-token', 'firebaseTokensController@register');
+Route::middleware('jwt.auth:api')->post('/realizar-notificacion/{id}', 'notificacionesController@enviarNotificacion');

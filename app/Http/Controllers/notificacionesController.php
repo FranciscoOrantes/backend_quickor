@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\notificaciones;
 use App\firebaseTokens;
-use FCM;
+use Fcm;
 class notificacionesController extends Controller
 {
     public function register(Request $request){
