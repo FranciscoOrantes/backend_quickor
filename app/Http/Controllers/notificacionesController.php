@@ -27,7 +27,7 @@ class notificacionesController extends Controller
     public function enviarNotificacion(Request $request,$id)
 {
     $token = firebaseTokens::select('firebase_tokens.token_firebase')
-    ->where('firebaseTokens.user_id','=',$id)->first()->toArray();
+    ->where('firebase_tokens.user_id','=',$id)->first()->toArray();
     
     fcm()
         ->to($token)
