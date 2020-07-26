@@ -124,5 +124,5 @@ Route::middleware('jwt.auth:api')->get('/pedidos-finalizados-proveedor/{id}', 'P
 
 //NOTIFICACIONES Y TOKENS
 Route::middleware('jwt.auth:api')->post('/registrar-token', 'firebaseTokensController@register');
-Route::middleware('jwt.auth:api')->get('/obtener-token/{id}', 'firebaseTokensController@show');
+Route::middleware('jwt.auth:api')->get('/obtener-token', 'firebaseTokensController@show');
 Route::middleware('jwt.auth:api')->post('/realizar-notificacion/{id}', 'notificacionesController@enviarNotificacion');
