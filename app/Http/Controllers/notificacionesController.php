@@ -36,3 +36,4 @@ class notificacionesController extends Controller
         ])
         ->send();
 }
+}
