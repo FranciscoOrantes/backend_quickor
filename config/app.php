@@ -176,6 +176,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         'JD\Cloudder\CloudderServiceProvider',
+        Kawankoding\Fcm\FcmServiceProvider::class,
 
     ],
 
@@ -228,7 +229,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Cloudder' => 'JD\Cloudder\Facades\Cloudder'
+        'Cloudder' => 'JD\Cloudder\Facades\Cloudder',
+        'Fcm' => Kawankoding\Fcm\FcmFacade::class,
 
     ],
 
