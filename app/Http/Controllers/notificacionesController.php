@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\notificaciones;
 use App\firebaseTokens;
 use fcm;
-use Crypt;
 class notificacionesController extends Controller
 {
     public function register(Request $request){
@@ -30,10 +29,10 @@ class notificacionesController extends Controller
     $recipients = firebaseTokens::select('firebase_tokens.token_firebase')
     ->where('user_id','=',$id)
         ->pluck('token_firebase')->toArray();
-    $recipients2=Crypt::decrypt($recipients);
-    print_r($recipients2);
+   
+    print_r($recipients);
     fcm()
-        ->to($recipients2)
+        ->to($recipients)
         ->notification([
             'title' => $request->title,
             'body' => $request->body
