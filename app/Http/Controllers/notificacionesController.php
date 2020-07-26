@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\notificaciones;
 use App\firebaseTokens;
-use Fcm;
+use fcm;
 class notificacionesController extends Controller
 {
     public function register(Request $request){
@@ -28,7 +28,7 @@ class notificacionesController extends Controller
 {
     $token = firebaseTokens::select('firebase_tokens.token_firebase')
     ->where('firebase_tokens.user_id','=',$id)->first()->toArray();
-    
+    print_r($token);
     fcm()
         ->to($token)
         ->notification([
