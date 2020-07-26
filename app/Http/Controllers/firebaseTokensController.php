@@ -21,9 +21,7 @@ class firebaseTokensController extends Controller
     if(sizeof($token)==0){
        return response('status_code',404);
     }else{
-      return response()->json([
-         'token_firebase' => $token[0],
-         ], 200);
+      return $token[0];
     }
       
    }
