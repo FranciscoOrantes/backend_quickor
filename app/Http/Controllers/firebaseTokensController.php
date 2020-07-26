@@ -11,7 +11,7 @@ class firebaseTokensController extends Controller
       $id = User::select('id')
     ->where('email','=',$request->email)->get();
     $token = new firebaseTokens();
-    $token->user_id=$id[0];
+    $token->user_id=$id[0]['id'];
     $token->token_firebase = $request->token_firebase;
     $token->save();
        
