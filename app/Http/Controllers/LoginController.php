@@ -48,12 +48,14 @@ protected $lockoutTime=60;
             $usuario = User::select('tipo_usuario','id')->where('email', $request->email)->get();
             $usuarioStatus = User::select('status')->where('email',$request->email)->get();    
             if($usuario[0]->tipo_usuario=='gerente'){
-                $usuario = User::select('users.tipo_usuario','gerentes.id','users.status','gerentes.user_id')
+                $usuario = User::select('users.tipo_usuario','gerentes.id','users.status','gerentes.user_id','firebase_tokens.token_firebase')
                 ->join('gerentes','users.id','=','gerentes.user_id')
+                ->join('firebase_tokens','users.id','=','firebase_tokens.user_id')
                 ->where('email', $request->email)->first()->toArray();
             }else{
-                $usuario = User::select('users.tipo_usuario','proveedors.id','users.status','proveedors.user_id')
+                $usuario = User::select('users.tipo_usuario','proveedors.id','users.status','proveedors.user_id','firebase_tokens.token_firebase')
                 ->join('proveedors','users.id','=','proveedors.user_id')
+                ->join('firebase_tokens','users.id','=','firebase_tokens.user_id')
                 ->where('email', $request->email)->first()->toArray();
             }
             if($usuario['status']==0){
