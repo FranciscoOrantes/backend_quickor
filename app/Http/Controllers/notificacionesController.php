@@ -34,8 +34,8 @@ class notificacionesController extends Controller
     fcm()
         ->to($recipients)
         ->notification([
-            'title' => $request->input('title'),
-            'body' => $request->input('body')
+            'title' => $request->title,
+            'body' => $request->body
         ])
         ->send();
 }
