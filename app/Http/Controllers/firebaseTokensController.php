@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 use App\firebaseTokens;
 use Illuminate\Http\Request;
-
+use App\User;
 class firebaseTokensController extends Controller
 {
    public function register(Request $request){
+
+      $id = User::select('id')
+    ->where('email','=',$request->email)->get();
     $token = new firebaseTokens();
-    $token->user_id = $request->user_id;
+    $token->$id[0];
     $token->token_firebase = $request->token_firebase;
     $token->save();
        
