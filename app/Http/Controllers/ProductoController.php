@@ -124,8 +124,8 @@ class ProductoController extends Controller
         + cos(radians(CAST('n.latitud' AS DECIMAL))) *cos(radians(CAST('p.latitud' AS DECIMAL))) 
         * cos(radians(CAST('n.longitud' AS DECIMAL))
         -radians(CAST('p.longitud' AS DECIMAL))))*6371) AS distanciaKm"))
-        ->where('n.id', '=', 11)
-        ->where('r.marca_id','=','marcas.id')->get();
+        ->where('n.id', '=', 11)->get();
+        //->where('r.marca_id','=','marcas.id')->get();
         //->groupByRaw('p.id,m.nombre,nombreCompleto,distanciaKm')
         //->orderBy('distanciaKm', 'asc')->get();
          return $proveedoresOrdenados;
