@@ -63,8 +63,13 @@ class MarcaController extends Controller
         return $query;
     }
 
+    public function show(){
+        $marcas = Marca::all();
+        return $marcas;
+    }
 
 
-     // Sólo es para la prueba local -> con vista PHP
+
+    
     
 }
