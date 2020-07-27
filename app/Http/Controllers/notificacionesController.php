@@ -54,6 +54,8 @@ $id = User::select('id')
 ->where('email','=',$request->email)->get();
 $notificaciones= notificaciones::select('notificaciones.*')
 ->where('user_id','=',$id[0]['id'])
+->orderBy('id', 'DESC')
+->take(10)
 ->get();
 return $notificaciones;
 }
