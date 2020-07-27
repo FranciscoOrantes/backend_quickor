@@ -61,6 +61,7 @@ class PedidosController extends Controller
        $pedidos = Pedidos::all();
        return $pedidos;
     }
+    //PENDIENTES
     public function listaPedidosDelGerente($id){
     $pedidos = Pedidos::select('pedidos.*','proveedors.nombre','proveedors.apellido_paterno','proveedors.apellido_materno','productos.nombre','productos.presentacion','productos.marca_id','marcas.nombre')
     ->join('proveedors','proveedors.id','pedidos.proveedor_id')
@@ -71,6 +72,7 @@ class PedidosController extends Controller
     ->get();
     return $pedidos;
 }
+    //PENDIENTES
     public function listaPedidosDelProveedor($id){
         $pedidos = Pedidos::select('pedidos.*','gerentes.nombre','gerentes.apellido_paterno','gerentes.apellido_materno','productos.nombre','productos.presentacion','productos.marca_id','marcas.nombre')
         ->join('gerentes','gerentes.id','pedidos.gerente_id')
@@ -91,6 +93,7 @@ class PedidosController extends Controller
         ->get();
         return $pedidos;
     }
+    //FINALIZADOS
     public function listaPedidosFinalizadosDelProveedor($id){
         $pedidos = Pedidos::select('pedidos.*','gerentes.nombre','gerentes.apellido_paterno','gerentes.apellido_materno','productos.nombre','productos.presentacion','productos.marca_id','marcas.nombre')
         ->join('gerentes','gerentes.id','pedidos.gerente_id')

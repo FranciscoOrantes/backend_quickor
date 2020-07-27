@@ -57,6 +57,9 @@ $notificaciones= notificaciones::select('notificaciones.*')
 ->orderBy('id', 'DESC')
 ->take(10)
 ->get();
-return $notificaciones;
+
+return response()->json([
+    'notificaciones' => $notificaciones,
+    ]);
 }
 }
