@@ -120,7 +120,8 @@ class ProductoController extends Controller
 
     public function marcasXProveedorCercano(){
         $proveedoresOrdenados = DB::table(DB::raw('proveedors p, negocios n, marcas m, productos r')) 
-        ->select(DB::raw("CONCAT('p.nombre',' ','p.apellido_paterno',' ',p.apellido_materno) AS nombreCompleto",'p.id','m.nombre',"(acos(sin(radians(CAST('n.latitud' AS DECIMAL))) * sin(radians(CAST('p.latitud' AS DECIMAL))) 
+        ->select(DB::raw("CONCAT('p.nombre',' ','p.apellido_paterno',' ',p.apellido_materno) AS nombreCompleto",'p.id','m.nombre'))
+        ->select(DB::raw("(acos(sin(radians(CAST('n.latitud' AS DECIMAL))) * sin(radians(CAST('p.latitud' AS DECIMAL))) 
         + cos(radians(CAST('n.latitud' AS DECIMAL))) *cos(radians(CAST('p.latitud' AS DECIMAL))) 
         * cos(radians(CAST('n.longitud' AS DECIMAL))
         -radians(CAST('p.longitud' AS DECIMAL))))*6371) AS distanciaKm"))
