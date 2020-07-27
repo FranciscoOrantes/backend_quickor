@@ -124,7 +124,7 @@ class ProductoController extends Controller
         ->where('n.id', '=', 11)
         ->where('r.marca_id','=', 'm.id')
         ->groupByRaw('p.id,m.nombre,nombreCompleto,distanciaKm')
-        ->order_by('distanciaKm', 'asc')->get();
+        ->orderBy('distanciaKm', 'asc')->get();
          return $proveedoresOrdenados;
     }
 
