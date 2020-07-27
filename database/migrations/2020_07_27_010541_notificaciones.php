@@ -18,8 +18,10 @@ class Notificaciones extends Migration
             $table->integer('user_id')->unsigned();            
             $table->foreign('user_id')->references('id')->on('users'); 
             $table->string('pedido');
+            $table->string('url_producto');
             $table->string('status');
             $table->string('total');
+            
             $table->timestamps();
         });
     }
