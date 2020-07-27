@@ -52,8 +52,9 @@ class notificacionesController extends Controller
 public function obtenerListaNotificaciones(Request $request){
 $id = User::select('id')
 ->where('email','=',$request->email)->get();
-$notificaciones= notificaciones::find($id[0]['id']);
-
+$notificaciones= notificaciones::select('notificaciones.*')
+->where('user_id','=',$id[0]['id'])
+->get();
 return $notificaciones;
 }
 }
