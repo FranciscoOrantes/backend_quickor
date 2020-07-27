@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\notificaciones;
 use App\firebaseTokens;
 use fcm;
+use App\User;
 class notificacionesController extends Controller
 {
     public function register(Request $request){
@@ -47,5 +48,12 @@ class notificacionesController extends Controller
            
         $notificacion = notificaciones::all();
         return $notificacion;    
+}
+public function obtenerListaNotificaciones(Request $request){
+$id = User::select('id')
+->where('email','=',$request->email)->get();
+$notificaciones= notificaciones::find($id[0]['id']);
+
+return $notificaciones;
 }
 }
