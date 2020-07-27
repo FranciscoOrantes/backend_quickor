@@ -124,7 +124,7 @@ class ProductoController extends Controller
         (acos(sin(radians(CAST(negocios.latitud AS DECIMAL))) * sin(radians(CAST(proveedors.latitud AS DECIMAL))) +
         cos(radians(CAST(negocios.latitud AS DECIMAL))) * cos(radians(CAST(proveedors.latitud AS DECIMAL))) *
         cos(radians(CAST(negocios.longitud AS DECIMAL)) - radians(CAST(proveedors.longitud AS DECIMAL)))) * 6371) as distanciaKm FROM proveedors,negocios,marcas,productos
-        WHERE negocios.id=11 AND productos.marca_id=marcas.id GROUP BY proveedors.id,marcas.nombre,nombreCompleto,distanciaKm ORDER BY distanciaKm ASC");
+        WHERE negocios.id='$negocioId' AND productos.marca_id=marcas.id GROUP BY proveedors.id,marcas.nombre,nombreCompleto,distanciaKm ORDER BY distanciaKm ASC");
 
 
 
