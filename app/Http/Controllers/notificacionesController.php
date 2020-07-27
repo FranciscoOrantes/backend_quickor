@@ -40,9 +40,9 @@ class notificacionesController extends Controller
         ->send();
         $notificacion = new notificaciones();
         $notificacion->user_id = $request->user_id;
-        $notificacion->pedido = 'PEDIDO EN PRODUCTO: ' + $request->pedido;
+        $notificacion->pedido = 'PEDIDO EN PRODUCTO: '.$request->pedido;
         $notificacion->status = $request->status;
-        $notificacion->total = 'TOTAL: $'+$request->total;
+        $notificacion->total = 'TOTAL: $'.$request->total;
         $notificacion->save();
            
         $notificacion = notificaciones::all();
