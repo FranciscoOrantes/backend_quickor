@@ -11,7 +11,7 @@ class notificaciones extends Model
     use Notifiable;
     use HasRoles;
     protected $fillable = [
-        'user_id','notificacion'
+        'user_id','title','body','tipo'
     ];
     public function getJWTIdentifier() {
         return $this->getKey();

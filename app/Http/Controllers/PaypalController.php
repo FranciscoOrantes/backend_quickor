@@ -45,7 +45,7 @@ class PaypalController extends Controller
         $transaction->setAmount($amount);
         // $transaction->setDescription('See your IQ results');
 
-        $callbackUrl = url('/paypal/status');
+        $callbackUrl = url('api/paypal/status');
 
         $redirectUrls = new RedirectUrls();
         $redirectUrls->setReturnUrl($callbackUrl)
@@ -86,10 +86,11 @@ class PaypalController extends Controller
 
         if ($result->getState() === 'approved') {
             $status = 'Gracias! El pago a través de PayPal se ha ralizado correctamente.';
-            return redirect('/results')->with(compact('status'));
+            return view('results', compact('status'));
         }
 
         $status = 'Lo sentimos! El pago a través de PayPal no se pudo realizar.';
-        return redirect('/results')->with(compact('status'));
+        
+        return view('results', compact('status'));
     }
 }

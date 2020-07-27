@@ -38,5 +38,14 @@ class notificacionesController extends Controller
             'body' => $request->body
         ])
         ->send();
+        $notificacion = new notificaciones();
+        $notificacion->user_id = $request->user_id;
+        $notificacion->title = $request->title;
+        $notificacion->body = $request->body;
+        $notificacion->tipo = $request->tipo;
+        $notificacion->save();
+           
+        $notificacion = notificaciones::all();
+        return $notificacion;    
 }
 }

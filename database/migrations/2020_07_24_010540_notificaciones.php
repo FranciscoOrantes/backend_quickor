@@ -17,7 +17,9 @@ class Notificaciones extends Migration
             $table->id();
             $table->integer('user_id')->unsigned();            
             $table->foreign('user_id')->references('id')->on('users'); 
-            $table->string('notificacion');
+            $table->string('title');
+            $table->string('body');
+            $table->string('tipo');
             $table->timestamps();
         });
     }
