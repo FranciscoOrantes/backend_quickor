@@ -48,7 +48,7 @@ class ContactosController extends Controller
        
         $nombre = $this->nombre;
 
-        $query = Contactos::select('contactos.*','gerentes.id','gerentes.nombre','gerentes.apellido_paterno','gerentes.apellido_materno','negocios.nombre','negocios.telefono','gerentes.user_id','users.status')
+        $query = Contactos::select('contactos.*','gerentes.id','gerentes.nombre','gerentes.apellido_paterno','gerentes.apellido_materno','negocios.nombre as negocio','negocios.telefono','gerentes.user_id','users.status')
         ->join('gerentes','gerentes.id','contactos.gerente_id')
         ->join('negocios','negocios.gerente_id','contactos.gerente_id')
         ->join('users','users.id','gerentes.user_id')
