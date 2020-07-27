@@ -59,6 +59,7 @@ Route::middleware('jwt.auth:api')->post('/buscar-negocios', 'NegociosController@
 
 //API MARCAS
 Route::middleware('jwt.auth:api')->get('/obtener-marcas', 'MarcaController@show');
+Route::middleware('jwt.auth:api')->get('/obtener-proveedores-ordenados', 'ProductoController@marcasXProveedorCercano');
 //Api productos
 Route::middleware('jwt.auth:api')->post('/registro-producto', 'ProductoController@register');
 Route::middleware('jwt.auth:api')->put('/actualizar-producto/{id}', 'ProductoController@update', function (Request $request) {

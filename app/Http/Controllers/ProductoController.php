@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Producto;
 use App\Proveedor;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Proveedores;
 use App\Http\Controllers\Input;
 use Cloudder;
@@ -118,10 +118,19 @@ class ProductoController extends Controller
         
     }
 
-    public function marcasXProveedor(){
-
-        
+    public function marcasXProveedorCercano(){
+        $proveedoresOrdenados = DB::table(DB::raw('proveedors p, negocios n, marcas m, productos r')) 
+        ->select(DB::raw("CONCAT('p.nombre',' ','p.apellido_paterno',' ',p.apellido_materno) AS nombreCompleto",'p.id','m.nombre',"(acos(sin(radians(CAST('n.latitud' AS DECIMAL))) * sin(radians(CAST('p.latitud' AS DECIMAL))) + cos(radians(CAST('n.latitud' AS DECIMAL))) *cos(radians(CAST('p.latitud' AS DECIMAL))) * cos(radians(CAST('n.longitud' AS DECIMAL)))-radians(CAST('p.longitud' AS DECIMAL)))*6371) AS distanciaKm"))
+        ->where('n.id', '=', 11)
+        ->where('r.marca_id','=', 'm.id')
+        ->groupByRaw('p.id,m.nombre,nombreCompleto,distanciaKm')
+        ->order_by('distanciaKm', 'asc')->get();
+         return $proveedoresOrdenados;
     }
+
+   
+
+    
 
     
 }
