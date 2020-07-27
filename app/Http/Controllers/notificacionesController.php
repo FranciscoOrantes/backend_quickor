@@ -34,15 +34,15 @@ class notificacionesController extends Controller
     fcm()
         ->to($recipients)
         ->notification([
-            'title' => $request->title,
-            'body' => $request->body
+            'title' => 'Tienes un nuevo Pedido!',
+            'body' => 'Haz click aqui para ver las notificaciones'
         ])
         ->send();
         $notificacion = new notificaciones();
         $notificacion->user_id = $request->user_id;
-        $notificacion->title = $request->title;
-        $notificacion->body = $request->body;
-        $notificacion->tipo = $request->tipo;
+        $notificacion->pedido = 'PEDIDO EN PRODUCTO: ' + $request->pedido;
+        $notificacion->status = $request->status;
+        $notificacion->total = 'TOTAL: $'+$request->total;
         $notificacion->save();
            
         $notificacion = notificaciones::all();

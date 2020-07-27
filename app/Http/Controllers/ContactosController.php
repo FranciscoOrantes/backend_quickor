@@ -17,7 +17,7 @@ class ContactosController extends Controller
         $contacto->save();
         return $contacto;
     }
-
+   //ELIMINAR CLIENTES Y PROVEEDORES
     
     public function destroy($id)
     {
