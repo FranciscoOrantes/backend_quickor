@@ -118,16 +118,18 @@ class ProductoController extends Controller
         
     }
 
-    public function marcasXProveedorCercano(){
-        $proveedoresOrdenados = DB::table('proveedors p, negocios n, marcas m, productos r') 
-        ->select(DB::raw("CONCAT('p.nombre',' ','p.apellido_paterno',' ',p.apellido_materno) AS nombreCompleto",'p.id','m.nombre',"(acos(sin(radians(CAST('n.latitud' AS DECIMAL))) * sin(radians(CAST('p.latitud' AS DECIMAL))) 
-        + cos(radians(CAST('n.latitud' AS DECIMAL))) *cos(radians(CAST('p.latitud' AS DECIMAL))) 
-        * cos(radians(CAST('n.longitud' AS DECIMAL))
-        -radians(CAST('p.longitud' AS DECIMAL))))*6371) AS distanciaKm"))
-        ->where('n.id', '=', 11)->get();
-        //->where('r.marca_id','=','marcas.id')->get();
-        //->groupByRaw('p.id,m.nombre,nombreCompleto,distanciaKm')
-        //->orderBy('distanciaKm', 'asc')->get();
+    public function marcasXProveedorCercano(Request $request){
+        $proveedoresOrdenados=DB::select(DB::raw("SELECT CONCAT(proveedors.nombre,' ',proveedors.apellido_paterno,' ',proveedors.apellido_materno) AS nombreCompleto,proveedors.id,marcas.nombre,
+        (acos(sin(radians(CAST(negocios.latitud AS DECIMAL))) * sin(radians(CAST(proveedors.latitud AS DECIMAL))) +
+        cos(radians(CAST(negocios.latitud AS DECIMAL))) * cos(radians(CAST(proveedors.latitud AS DECIMAL))) *
+        cos(radians(CAST(negocios.longitud AS DECIMAL)) - radians(CAST(proveedors.longitud AS DECIMAL)))) * 6371) as distanciaKm FROM proveedors,negocios,marcas,productos
+        WHERE negocios.id=:negocioId AND productos.marca_id=marcas.id GROUP BY proveedors.id,marcas.nombre,nombreCompleto,distanciaKm ORDER BY distanciaKm ASC"),array(
+            'negocioId' =>$request->negocio_id,
+        ));
+
+
+
+
          return $proveedoresOrdenados;
     }
 
