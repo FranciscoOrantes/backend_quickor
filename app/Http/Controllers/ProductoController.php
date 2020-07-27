@@ -120,14 +120,15 @@ class ProductoController extends Controller
 
     public function marcasXProveedorCercano(){
         $proveedoresOrdenados = DB::table(DB::raw('proveedors p, negocios n, marcas m, productos r')) 
-        ->select(DB::raw("CONCAT('p.nombre',' ','p.apellido_paterno',' ',p.apellido_materno) AS nombreCompleto",'p.id','m.nombre',"acos(sin(radians(CAST('n.latitud' AS DECIMAL))) * sin(radians(CAST('p.latitud' AS DECIMAL))) 
+        ->select(DB::raw("CONCAT('p.nombre',' ','p.apellido_paterno',' ',p.apellido_materno) AS nombreCompleto",'p.id','m.nombre',"(acos(sin(radians(CAST('n.latitud' AS DECIMAL))) * sin(radians(CAST('p.latitud' AS DECIMAL))) 
         + cos(radians(CAST('n.latitud' AS DECIMAL))) *cos(radians(CAST('p.latitud' AS DECIMAL))) 
         * cos(radians(CAST('n.longitud' AS DECIMAL))
-        -radians(CAST('p.longitud' AS DECIMAL))))*6371 AS distanciaKm"))
+        -radians(CAST('p.longitud' AS DECIMAL))))*6371) AS distanciaKm"))
+        ->select(DB::raw())
         ->where('n.id', '=', 11)
-        ->where('r.marca_id','=', 'm.id')
-        ->groupByRaw('p.id,m.nombre,nombreCompleto,distanciaKm')
-        ->orderBy('distanciaKm', 'asc')->get();
+        ->where('r.marca_id','=', 'm.id')->get();
+        //->groupByRaw('p.id,m.nombre,nombreCompleto,distanciaKm')
+        //->orderBy('distanciaKm', 'asc')->get();
          return $proveedoresOrdenados;
     }
 
