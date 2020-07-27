@@ -124,7 +124,6 @@ class ProductoController extends Controller
         + cos(radians(CAST('n.latitud' AS DECIMAL))) *cos(radians(CAST('p.latitud' AS DECIMAL))) 
         * cos(radians(CAST('n.longitud' AS DECIMAL))
         -radians(CAST('p.longitud' AS DECIMAL))))*6371 AS distanciaKm"))
-        ->select(DB::raw())
         ->where('n.id', '=', 11)
         ->where('r.marca_id','=', 'm.id')
         ->groupByRaw('p.id,m.nombre,nombreCompleto,distanciaKm')
