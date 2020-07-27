@@ -31,7 +31,8 @@ class notificacionesController extends Controller
     
     
     $url_producto = Producto::select('logo')
-    ->where('id','=',$request->producto_id);
+    ->where('id','=',$request->producto_id)
+    ->get();
     $recipients = firebaseTokens::select('firebase_tokens.token_firebase')
     ->where('user_id','=',$id)
     ->pluck('token_firebase')->toArray();
@@ -47,7 +48,7 @@ class notificacionesController extends Controller
         $notificacion = new notificaciones();
         $notificacion->user_id = $request->user_id;
         $notificacion->pedido = 'PEDIDO EN PRODUCTO: '.$request->pedido;
-        $notificacion->url_producto = $url_producto;
+        $notificacion->url_producto = $url_producto[0]['logo'];
         $notificacion->status = $request->status;
         $notificacion->total = 'TOTAL: $'.$request->total;
         $notificacion->save();
