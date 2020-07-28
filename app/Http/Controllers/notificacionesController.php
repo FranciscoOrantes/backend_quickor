@@ -34,7 +34,7 @@ class notificacionesController extends Controller
     $url_producto = Producto::select('logo')
     ->where('id','=',$request->producto_id)
     ->get();
-    $idProveedor = Proveedor::select('user_id')->where('user_id','=',$id)->get();
+    $idProveedor = Proveedor::select('user_id')->where('id','=',$id)->get();
     $recipients = firebaseTokens::select('firebase_tokens.token_firebase')
     ->where('user_id','=',$idProveedor[0]['user_id'])
     ->pluck('token_firebase')->toArray();
