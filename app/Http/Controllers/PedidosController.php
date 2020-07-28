@@ -110,7 +110,7 @@ class PedidosController extends Controller
         ->join('gerentes','gerentes.id','pedidos.gerente_id')
         ->join('productos','productos.id','pedidos.producto_id')
         ->join('marcas','marcas.id','productos.marca_id')
-        ->join('negocios','negocios.id','negocios.gerente_id')
+        ->join('negocios','negocios.gerente_id','gerentes.id')
         ->where('pedidos.proveedor_id','=',$id)
         ->get();
         return $pedidos;
