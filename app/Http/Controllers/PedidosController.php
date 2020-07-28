@@ -50,7 +50,7 @@ class PedidosController extends Controller
         $pedido->producto_id = $request->producto_id;
         $pedido->proveedor_id = $request->proveedor_id;
         $pedido->gerente_id = $request->gerente_id;
-        $pedido->status = '0';
+        $pedido->status = 'En proceso';
         $pedido->status_pago = $request->status_pago;
         $pedido->fecha =$request->fechaActual;
         $pedido->num_pedido = $num_pedido_actual;
@@ -58,8 +58,8 @@ class PedidosController extends Controller
         
         $pedido->save();
        
-       $pedidos = Pedidos::all();
-       return $pedidos;
+       
+       return $pedido;
     }
     //PENDIENTES
     public function listaPedidosDelGerente($id){

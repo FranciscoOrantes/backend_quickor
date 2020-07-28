@@ -91,7 +91,10 @@ class PaypalController extends Controller
         }
 
         $status = 'Lo sentimos! El pago a través de PayPal no se pudo realizar.';
-        
+        otroMetodo($result->getState());
         return view('results', compact('status'));
+    }
+    public function otroMetodo($status){
+
     }
 }
