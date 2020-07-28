@@ -104,7 +104,7 @@ Route::middleware('jwt.auth:api')->post('/registrar-pedido', 'PedidosController@
  });
 
  //Route::post('/registrar-pedidoprueba', 'PedidosController@register');
-Route::get('/paypal/pay', 'PaypalController@payWithPayPal');
+Route::post('/paypal/pay/', 'PaypalController@payWithPayPal');
 Route::get('/paypal/status', 'PaypalController@payPalStatus');
 
 

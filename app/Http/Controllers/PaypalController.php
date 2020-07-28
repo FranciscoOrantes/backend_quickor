@@ -32,13 +32,14 @@ class PaypalController extends Controller
 
         $this->apiContext->setConfig($payPalConfig['settings']);
     }
-    public function payWithPayPal()
+    public function payWithPayPal(Request $request)
     {
+        
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
 
         $amount = new Amount();
-        $amount->setTotal('3.99');
+        $amount->setTotal($request->pago);
         $amount->setCurrency('MXN');
 
         $transaction = new Transaction();
