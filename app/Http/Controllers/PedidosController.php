@@ -106,10 +106,11 @@ class PedidosController extends Controller
     }
 
     public function listaPedidosTotalesDelProveedor($id){
-        $pedidos = Pedidos::select('pedidos.*','gerentes.nombre','gerentes.apellido_paterno','gerentes.apellido_materno','productos.nombre','productos.presentacion','productos.marca_id','marcas.nombre')
+        $pedidos = Pedidos::select('pedidos.*','gerentes.nombre','gerentes.apellido_paterno','gerentes.apellido_materno','productos.nombre','productos.presentacion','productos.marca_id','productos.logo','marcas.nombre','negocios.latitud','negocios.longitud')
         ->join('gerentes','gerentes.id','pedidos.gerente_id')
         ->join('productos','productos.id','pedidos.producto_id')
         ->join('marcas','marcas.id','productos.marca_id')
+        ->join('negocios','negocios.id','negocios.gerente_id')
         ->where('pedidos.proveedor_id','=',$id)
         ->get();
         return $pedidos;
