@@ -114,6 +114,15 @@ class PedidosController extends Controller
         ->get();
         return $pedidos;
     }
+    public function listaPedidosTotalesDelGerente($id){
+        $pedidos = Pedidos::select('pedidos.*','proveedors.nombre','proveedors.apellido_paterno','proveedors.apellido_materno','productos.nombre','productos.presentacion','productos.marca_id','marcas.nombre')
+        ->join('proveedors','proveedors.id','pedidos.proveedor_id')
+        ->join('productos','productos.id','pedidos.producto_id')
+        ->join('marcas','marcas.id','productos.marca_id')
+        ->where('pedidos.gerente_id','=',$id)
+        ->get();
+        return $pedidos;
+    }
 
     public function cancelarPedido($id){
         $pedido = Pedidos::find($id);
