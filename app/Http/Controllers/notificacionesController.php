@@ -8,6 +8,7 @@ use App\firebaseTokens;
 use App\Producto;
 use fcm;
 use App\User;
+use App\Proveedor;
 class notificacionesController extends Controller
 {
     public function register(Request $request){
@@ -33,6 +34,7 @@ class notificacionesController extends Controller
     $url_producto = Producto::select('logo')
     ->where('id','=',$request->producto_id)
     ->get();
+    $idProveedor = Proveedor::select('user_id')->where('user_id','=',$id)->get();
     $recipients = firebaseTokens::select('firebase_tokens.token_firebase')
     ->where('user_id','=',$id)
     ->pluck('token_firebase')->toArray();
@@ -46,7 +48,7 @@ class notificacionesController extends Controller
         ])
         ->send();
         $notificacion = new notificaciones();
-        $notificacion->user_id = $request->user_id;
+        $notificacion->user_id = $idProveedor[0]['user_id'];
         $notificacion->pedido = 'PEDIDO EN PRODUCTO: '.$request->pedido;
         $notificacion->url_producto = $url_producto[0]['logo'];
         $notificacion->status = $request->status;
