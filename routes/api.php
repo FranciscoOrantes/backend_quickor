@@ -78,7 +78,7 @@ Route::middleware('jwt.auth:api')->get('/buscar-productos-general', 'ProductoCon
 Route::middleware('jwt.auth:api')->get('/buscar-productos-categoria', 'ProductoController@filtrarPorCategoria', function (Request $request) {
     return $request->producto();
 });
-
+Route::middleware('jwt.auth:api')->get('/obtener-productos-proveedor/{id}', 'ProductoController@listaProductosProveedor');
 Route::middleware('jwt.auth:api')->post('/buscar-proveedor-producto', 'ProductoController@BuscarProveedorProducto');
     Route::middleware('jwt.auth:api')->post('/buscar-producto-por-proveedor', 'ProductoController@BuscarProductoPorProveedor');
 //Termina API productos

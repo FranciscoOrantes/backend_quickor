@@ -95,9 +95,9 @@ class ProductoController extends Controller
      public function BuscarProveedorProducto(Request $request){
 
         $nombre = $request->nombre;
-        $query = Proveedor::select('proveedores.id','proveedores.nombre', 'proveedores.apellido_paterno',
-        'proveedores.apellido_materno','proveedores.telefono','proveedores.direccion', 'proveedores.user_id')
-        ->join('productos','productos.proveedor_id','proveedores.id')
+        $query = Proveedor::select('proveedors.id','proveedors.nombre', 'proveedors.apellido_paterno',
+        'proveedors.apellido_materno','proveedors.telefono','proveedors.direccion', 'proveedors.user_id')
+        ->join('productos','productos.proveedor_id','proveedors.id')
         ->where('productos.nombre','LIKE','%'.$nombre.'%')
         ->get();
             
@@ -110,10 +110,22 @@ class ProductoController extends Controller
         $nombre = $request->nombre;
         $query = Producto::select('productos.id','productos.nombre', 'productos.presentacion','productos.cantidad_presentacion',
         'productos.tamano_producto','productos.precio','productos.logo', 'productos.marca_id','productos.proveedor_id')
-        ->join('proveedores','proveedores.id','productos.proveedor_id')
-        ->where('proveedores.nombre','LIKE','%'.$nombre.'%')
+        ->join('proveedors','proveedors.id','productos.proveedor_id')
+        ->where('proveedors.nombre','LIKE','%'.$nombre.'%')
         ->get();
             
+        return $query;
+        
+    }
+
+    public function listaProductosProveedor(Request $request,$id)
+    {
+       
+        $query = Producto::select('productos.id','productos.nombre', 'productos.presentacion','productos.cantidad_presentacion',
+        'productos.tamano_producto','productos.precio','productos.logo', 'productos.marca_id','productos.proveedor_id')
+        ->join('proveedors','proveedors.id','productos.proveedor_id')
+        ->where('productos.proveedor_id','=',$id)
+        ->get();
         return $query;
         
     }
