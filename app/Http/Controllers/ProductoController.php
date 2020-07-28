@@ -120,11 +120,12 @@ class ProductoController extends Controller
 
     public function listaProductosProveedor(Request $request,$id)
     {
-       
+       $marca_id = $request->marca_id;
         $query = Producto::select('productos.id','productos.nombre', 'productos.presentacion','productos.cantidad_presentacion',
         'productos.tamano_producto','productos.precio','productos.logo', 'productos.marca_id','productos.proveedor_id')
         ->join('proveedors','proveedors.id','productos.proveedor_id')
         ->where('productos.proveedor_id','=',$id)
+        ->where('productos.marca_id','=',$marca_id)
         ->get();
         return $query;
         
