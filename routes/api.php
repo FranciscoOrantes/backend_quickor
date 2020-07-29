@@ -59,6 +59,7 @@ Route::middleware('jwt.auth:api')->post('/buscar-negocios', 'NegociosController@
 
 //API MARCAS
 Route::middleware('jwt.auth:api')->get('/obtener-marcas', 'MarcaController@show');
+Route::middleware('jwt.auth:api')->post('/buscar-marca', 'MarcaController@buscar');
 Route::middleware('jwt.auth:api')->post('/obtener-proveedores-ordenados', 'ProductoController@marcasXProveedorCercano');
 //Api productos
 Route::middleware('jwt.auth:api')->post('/registro-producto', 'ProductoController@register');
@@ -107,6 +108,7 @@ Route::middleware('jwt.auth:api')->post('/registrar-pedido', 'PedidosController@
  //Route::post('/registrar-pedidoprueba', 'PedidosController@register');
 Route::get('/paypal/pay/{pago}', 'PaypalController@payWithPayPal');
 Route::get('/paypal/status', 'PaypalController@payPalStatus');
+Route::get('/paypal/pagado/{status}', 'PaypalController@accionPagado');
 
 
 //API CONTACTOS
