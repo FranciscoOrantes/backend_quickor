@@ -126,6 +126,7 @@ Route::middleware('jwt.auth:api')->get('/pedidos-finalizados-proveedor/{id}', 'P
 Route::middleware('jwt.auth:api')->get('/pedidos-totales-proveedor/{id}', 'PedidosController@listaPedidosTotalesDelProveedor');
 Route::middleware('jwt.auth:api')->get('/pedidos-totales-gerente/{id}', 'PedidosController@listaPedidosTotalesDelGerente');
 Route::middleware('jwt.auth:api')->put('/actualizar-status-pedido/{id}', 'PedidosController@actualizarACompletado');
+Route::middleware('jwt.auth:api')->put('/actualizar-status-pago/{id}', 'PedidosController@actualizarPagoACompletado');
 //NOTIFICACIONES Y TOKENS
 Route::middleware('jwt.auth:api')->post('/registrar-token', 'firebaseTokensController@register');
 Route::middleware('jwt.auth:api')->post('/obtener-token', 'firebaseTokensController@show');
