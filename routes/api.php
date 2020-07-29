@@ -122,7 +122,7 @@ Route::middleware('jwt.auth:api')->put('/cancelar-pedido/{id}', 'PedidosControll
 Route::middleware('jwt.auth:api')->get('/pedidos-proceso-gerente/{id}', 'PedidosController@listaPedidosDelGerente');
 Route::middleware('jwt.auth:api')->get('/pedidos-proceso-proveedor/{id}', 'PedidosController@listaPedidosDelProveedor');
 Route::middleware('jwt.auth:api')->get('/pedidos-finalizados-gerente/{id}', 'PedidosController@pedidosFinalizadosDelGerente');
-Route::middleware('jwt.auth:api')->get('/pedidos-finalizados-proveedor/{id}', 'PedidosController@listaPedidosFinalizadosDelProveedor');
+Route::middleware('jwt.auth:api')->get('/pedidos-finalizados-proveedor/{id}', 'PedidosController@pedidosFinalizadosDelProveedor');
 Route::middleware('jwt.auth:api')->get('/pedidos-totales-proveedor/{id}', 'PedidosController@listaPedidosTotalesDelProveedor');
 Route::middleware('jwt.auth:api')->get('/pedidos-totales-gerente/{id}', 'PedidosController@listaPedidosTotalesDelGerente');
 Route::middleware('jwt.auth:api')->put('/actualizar-status-pedido/{id}', 'PedidosController@actualizarACompletado');
