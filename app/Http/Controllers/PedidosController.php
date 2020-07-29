@@ -75,12 +75,13 @@ class PedidosController extends Controller
 public function actualizarACompletado($id){
 $pedido = Pedidos::find($id);
 $pedido->status = 'Completado';
+$pedido->status_pago = 'pagado';
 $pedido->update();
 return $pedido;
 }
 public function actualizarPagoACompletado($id){
     $pedido = Pedidos::find($id);
-    $pedido->status_pago = 'pagado';
+  
     $pedido->update();
     return $pedido;
     }
