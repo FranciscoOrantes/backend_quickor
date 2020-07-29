@@ -130,6 +130,16 @@ return $pedido;
         ->get();
         return $pedidos;
     }
+    public function pedidosFinalizadosDelGerente($id){
+        $pedidos = Pedidos::select('pedidos.*','proveedors.nombre','proveedors.apellido_paterno','proveedors.apellido_materno','productos.nombre as producto','productos.presentacion','productos.marca_id','marcas.logo','productos.precio','marcas.nombre as marca')
+        ->join('proveedors','proveedors.id','pedidos.proveedor_id')
+        ->join('productos','productos.id','pedidos.producto_id')
+        ->join('marcas','marcas.id','productos.marca_id')
+        ->where('pedidos.gerente_id','=',$id)
+        ->where('pedidos.statis','=','Completado')
+        ->get();
+        return $pedidos;
+    }
 
     public function cancelarPedido($id){
         $pedido = Pedidos::find($id);
