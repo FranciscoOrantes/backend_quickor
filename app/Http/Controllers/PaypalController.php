@@ -84,15 +84,16 @@ class PaypalController extends Controller
 
         /** Execute the payment **/
         $result = $payment->execute($execution, $this->apiContext);
-
+        print($result->getState());
         if ($result->getState() === 'approved') {
+           return response($result->getState());
             $status = 'Gracias! El pago a través de PayPal se ha ralizado correctamente.';
-            return view('results', compact('status'));
+           // return view('results', compact('status'));
         }
 
         $status = 'Lo sentimos! El pago a través de PayPal no se pudo realizar.';
-        
-        return view('results', compact('status'));
+        return response(502);
+        //return view('results', compact('status'));
     }
     public function otroMetodo($status){
 

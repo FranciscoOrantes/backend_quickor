@@ -72,6 +72,12 @@ class PedidosController extends Controller
     ->get();
     return $pedidos;
 }
+public function actualizarACompletado($id){
+$pedido = Pedidos::find($id);
+$pedido->status = 'Completado';
+$pedido->update();
+return $pedido;
+}
     //PENDIENTES
     public function listaPedidosDelProveedor($id){
         $pedidos = Pedidos::select('pedidos.*','gerentes.nombre','gerentes.apellido_paterno','gerentes.apellido_materno','productos.nombre','productos.presentacion','productos.marca_id','marcas.nombre')
