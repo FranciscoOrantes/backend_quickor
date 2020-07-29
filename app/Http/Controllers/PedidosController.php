@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use DateTime;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Pedidos;
 class PedidosController extends Controller
@@ -58,7 +59,7 @@ class PedidosController extends Controller
         
         $pedido->save();
        
-       
+        Log::info('Se ha realizado un pedido');
        return $pedido;
     }
     //PENDIENTES
