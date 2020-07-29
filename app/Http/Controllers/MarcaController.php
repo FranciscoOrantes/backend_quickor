@@ -56,7 +56,7 @@ class MarcaController extends Controller
     }
     public function buscar(Request $request){
         $nombre = $request->nombre;
-        $query = Marca::select('marca.*')
+        $query = Marca::select('marcas.*')
         ->where('nombre','LIKE','%'.$nombre.'%')
         ->get();
         
