@@ -86,6 +86,11 @@ class PaypalController extends Controller
         $result = $payment->execute($execution, $this->apiContext);
         print($result->getState());
         if ($result->getState() === 'approved') {
+            $callbackUrl = url('api/paypal/pagado');
+
+            $redirectUrls = new RedirectUrls();
+            $redirectUrls->setReturnUrl($callbackUrl);
+            
            return response($result->getState());
             $status = 'Gracias! El pago a través de PayPal se ha ralizado correctamente.';
            // return view('results', compact('status'));

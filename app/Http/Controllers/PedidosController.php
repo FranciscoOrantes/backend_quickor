@@ -150,7 +150,7 @@ public function actualizarPagoACompletado($id){
     }
 
     public function pedidosFinalizadosDelProveedor ($id){
-        $pedidos = Pedidos::select('pedidos.*','gerentes.nombre','gerentes.apellido_paterno','gerentes.apellido_materno','productos.nombre','productos.presentacion','productos.marca_id','productos.logo','marcas.nombre','negocios.latitud','negocios.longitud')
+        $pedidos = Pedidos::select('pedidos.*','gerentes.nombre','gerentes.apellido_paterno','gerentes.apellido_materno','productos.nombre as producto','productos.presentacion','productos.marca_id','productos.logo','marcas.nombre as marca','negocios.latitud','negocios.longitud')
         ->join('gerentes','gerentes.id','pedidos.gerente_id')
         ->join('productos','productos.id','pedidos.producto_id')
         ->join('marcas','marcas.id','productos.marca_id')
