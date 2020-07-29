@@ -125,6 +125,7 @@ public function actualizarPagoACompletado($id){
         ->join('marcas','marcas.id','productos.marca_id')
         ->join('negocios','negocios.gerente_id','gerentes.id')
         ->where('pedidos.proveedor_id','=',$id)
+        ->where('pedidos.status','=','En proceso')
         ->get();
         return $pedidos;
     }
@@ -134,6 +135,7 @@ public function actualizarPagoACompletado($id){
         ->join('productos','productos.id','pedidos.producto_id')
         ->join('marcas','marcas.id','productos.marca_id')
         ->where('pedidos.gerente_id','=',$id)
+        
         ->get();
         return $pedidos;
     }
