@@ -60,7 +60,10 @@ class ProductoController extends Controller
         $producto = Producto::find($id);
         $producto->delete();
     }
-
+    public function show($id){
+        $producto = Producto::find($id);
+       return $producto;
+    }
 
     public function listProducts($id)
     {
