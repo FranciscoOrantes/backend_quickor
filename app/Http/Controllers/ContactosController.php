@@ -19,9 +19,12 @@ class ContactosController extends Controller
     }
    //ELIMINAR CLIENTES Y PROVEEDORES
     
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $contacto = Contactos::find($id);
+        $gerente_id = $request->gerente_id;
+        $proveedor_id = $request->proveedor_id;
+        $contacto = Contactos::select('contactos.*')->where('contactos.gerente_id','=',$gerente_id)
+        ->where('contactos.proveedor_id','=',$proveedor_id);
         $contacto->delete();
 
     }
